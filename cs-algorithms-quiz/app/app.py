@@ -24,8 +24,8 @@ def validate_answer():
     question_id = data.get('question_id')
     answer = data.get('answer')
     
-    is_correct = mcp_service.validate_answer(topic, question_id, answer)
-    return jsonify({'correct': is_correct})
+    result = mcp_service.validate_answer(topic, question_id, answer)
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True) 
