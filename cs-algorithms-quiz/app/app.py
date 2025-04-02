@@ -1,6 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+from mcp_service import MCPService
 
 app = Flask(__name__)
+mcp_service = MCPService()
 
 @app.route('/')
 def index():
@@ -12,7 +14,18 @@ def binary_search_tree_info():
 
 @app.route('/algo/binary-search-tree/test')
 def binary_search_tree_test():
-    return render_template('binary_search_tree_test.html')
+    question = mcp_service.generate_question('binary-search-tree')
+    return render_template('binary_search_tree_test.html', question=question)
+
+@app.route('/api/validate-answer', methods=['POST'])
+def validate_answer():
+    data = request.get_json()
+    topic = data.get('topic')
+    question_id = data.get('question_id')
+    answer = data.get('answer')
+    
+    is_correct = mcp_service.validate_answer(topic, question_id, answer)
+    return jsonify({'correct': is_correct})
 
 if __name__ == '__main__':
     app.run(debug=True) 
