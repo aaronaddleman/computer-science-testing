@@ -9,8 +9,71 @@
 <body>
     <div class="container">
         <h1>Binary Search Tree Test</h1>
-        <p>Question about Binary Search Trees...</p>
-        <!-- Add question and answer options here -->
+        <div id="question-container">
+            <p>{{ question.question }}</p>
+            <form id="answer-form" data-question-id="{{ question.id }}">
+                {% for option in question.options %}
+                <div class="option">
+                    <input type="radio" name="answer" value="{{ loop.index0 }}" id="option{{ loop.index }}">
+                    <label for="option{{ loop.index }}">{{ option }}</label>
+                </div>
+                {% endfor %}
+                <button type="submit" class="button">Submit Answer</button>
+            </form>
+            <div id="result" style="display: none;"></div>
+            <div id="explanation" style="display: none;" class="explanation"></div>
+            <button id="next-question" class="button" style="display: none;">Next Question</button>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('answer-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const answer = document.querySelector('input[name="answer"]:checked');
+            if (!answer) {
+                alert('Please select an answer');
+                return;
+            }
+
+            const questionId = this.getAttribute('data-question-id');
+
+            fetch('/api/validate-answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    topic: 'binary-search-tree',
+                    question_id: questionId,
+                    answer: parseInt(answer.value)
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                const explanationDiv = document.getElementById('explanation');
+                const nextButton = document.getElementById('next-question');
+                
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = data.correct ? 
+                    '<p class="correct">Correct!</p>' : 
+                    '<p class="incorrect">Incorrect. Try again!</p>';
+                
+                if (data.explanation) {
+                    explanationDiv.style.display = 'block';
+                    explanationDiv.innerHTML = `<p><strong>Explanation:</strong> ${data.explanation}</p>`;
+                }
+
+                if (data.correct) {
+                    nextButton.style.display = 'block';
+                }
+            });
+        });
+
+        document.getElementById('next-question').addEventListener('click', function() {
+            window.location.reload();
+        });
+    </script>
 </body>
 </html> 
