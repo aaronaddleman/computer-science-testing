@@ -31,13 +31,13 @@ def init_routes(app):
             return "Topic not found", 404
 
         # Load the algorithm data
-        data = load_algorithm_data(topic.replace('-', '_'))
-        if not data:
+        topic_data = load_algorithm_data(topic.replace('-', '_'))
+        if not topic_data:
             return "Topic data not found", 404
 
         # Pass both the template directory and data to the template
         return render_template('algorithm_info.html',
-                             topic=data,
+                             topic_data=topic_data,
                              template_dir=template_dir)
 
     @app.route('/algo/<topic>/test')

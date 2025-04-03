@@ -53,12 +53,22 @@ def metrics():
 
 @app.route('/algo/<topic>/info')
 def topic_info(topic):
+    # Map URL-friendly topic names to template directory names
+    topic_map = {
+        'sorting-algorithms': 'sorting',
+        'graph-algorithms': 'graph',
+        'dynamic-programming': 'dp',
+        'binary-search-tree': 'bst'
+    }
+    
     if topic not in TOPIC_TEMPLATES:
         return "Topic not found", 404
     
     template = TOPIC_TEMPLATES[topic]['info']
     topic_data = mcp_service.get_topic_info(topic)
-    return render_template(template, topic=topic_data)
+    template_dir = topic_map.get(topic)
+    
+    return render_template(template, topic_data=topic_data, template_dir=template_dir)
 
 @app.route('/algo/<topic>/test')
 def topic_test(topic):
