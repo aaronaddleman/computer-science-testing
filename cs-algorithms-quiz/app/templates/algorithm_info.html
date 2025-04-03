@@ -86,58 +86,69 @@
 .button-section .button:hover {
     background-color: #2980b9;
 }
+.topic-header {
+    margin-bottom: 30px;
+}
+.topic-header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+.topic-header .description {
+    color: #666;
+    font-size: 1.1em;
+}
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="topic-header">
     <h1>{{ topic_data.name }}</h1>
     <p class="description">{{ topic_data.description }}</p>
-    
-    <div class="study-section">
-        <h2>Overview</h2>
-        {% include template_dir ~ '/overview.html' ignore missing %}
-    </div>
+</div>
 
-    <div class="study-section">
-        <h2>Examples</h2>
-        {% include template_dir ~ '/examples.html' ignore missing %}
-    </div>
+<div class="study-section">
+    <h2>Overview</h2>
+    {% include template_dir ~ '/overview.html' ignore missing %}
+</div>
 
-    <div class="study-section">
-        <h2>Time and Space Complexity</h2>
-        {% include template_dir ~ '/complexity.html' ignore missing %}
-    </div>
+<div class="study-section">
+    <h2>Examples</h2>
+    {% include template_dir ~ '/examples.html' ignore missing %}
+</div>
 
-    {% if topic_data.images %}
-    <div class="image-section">
-        {% if topic_data.images is mapping %}
-            {% for name, path in topic_data.images.items() %}
-            <div class="study-image">
-                <img src="{{ url_for('static', filename=path) }}" alt="{{ name }}">
-                <p class="image-caption">{{ name | replace('_', ' ') | title }}</p>
-            </div>
-            {% endfor %}
-        {% else %}
-            {% for image in topic_data.images %}
-            <div class="study-image">
-                <img src="{{ url_for('static', filename='images/' + image.filename) }}" alt="{{ image.caption }}">
-                <p class="image-caption">{{ image.caption }}</p>
-            </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+<div class="study-section">
+    <h2>Time and Space Complexity</h2>
+    {% include template_dir ~ '/complexity.html' ignore missing %}
+</div>
+
+{% if topic_data.images %}
+<div class="image-section">
+    {% if topic_data.images is mapping %}
+        {% for name, path in topic_data.images.items() %}
+        <div class="study-image">
+            <img src="{{ url_for('static', filename=path) }}" alt="{{ name }}">
+            <p class="image-caption">{{ name | replace('_', ' ') | title }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        {% for image in topic_data.images %}
+        <div class="study-image">
+            <img src="{{ url_for('static', filename='images/' + image.filename) }}" alt="{{ image.caption }}">
+            <p class="image-caption">{{ image.caption }}</p>
+        </div>
+        {% endfor %}
     {% endif %}
+</div>
+{% endif %}
 
-    <div class="study-section">
-        <h2>Common Pitfalls and Tips</h2>
-        {% include template_dir ~ '/common_pitfalls.html' ignore missing %}
-    </div>
+<div class="study-section">
+    <h2>Common Pitfalls and Tips</h2>
+    {% include template_dir ~ '/common_pitfalls.html' ignore missing %}
+</div>
 
-    <div class="button-section">
-        <a href="{{ request.path.replace('/info', '/test') }}" class="button">Take Quiz</a>
-        <a href="/" class="button">Back to Topics</a>
-    </div>
+<div class="button-section">
+    <a href="{{ request.path.replace('/info', '/test') }}" class="button">Take Quiz</a>
+    <a href="/" class="button">Back to Topics</a>
 </div>
 {% endblock %}
 

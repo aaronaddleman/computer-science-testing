@@ -170,5 +170,50 @@ class TestApp(unittest.TestCase):
             self.assertIn('message', data,
                 f"Error message missing for invalid question in topic {topic}")
 
+    def test_single_header_presence(self):
+        """Test to ensure there is exactly one header element on each page with correct navigation."""
+        # Test the home page
+        response = self.app.get('/')
+        assert response.status_code == 200
+        html = response.data.decode()
+        
+        # Check header count on home page
+        assert html.count('<header class="header">') == 1, "Should have exactly one header element on home page"
+        assert '<h1 class="site-title"><a href="/">CS Algorithms Quiz</a></h1>' in html
+        assert '<nav class="main-nav">' in html
+        assert '<a href="/">Home</a>' in html
+        assert html.count('<nav class="main-nav">') == 1, "Should have exactly one navigation element on home page"
+        assert html.count('<h1 class="site-title">') == 1, "Should have exactly one site title on home page"
+        
+        # Test all topic info pages
+        topics = ['binary-search-tree', 'sorting-algorithms', 'graph-algorithms', 'dynamic-programming']
+        for topic in topics:
+            # Test info page
+            response = self.app.get(f'/algo/{topic}/info')
+            assert response.status_code == 200, f"Info page for {topic} should return 200"
+            html = response.data.decode()
+            
+            # Check header count on info page
+            assert html.count('<header class="header">') == 1, f"Should have exactly one header element on {topic} info page"
+            assert '<h1 class="site-title"><a href="/">CS Algorithms Quiz</a></h1>' in html, f"Site title missing on {topic} info page"
+            assert '<nav class="main-nav">' in html, f"Navigation missing on {topic} info page"
+            assert '<a href="/">Home</a>' in html, f"Home link missing on {topic} info page"
+            assert f'<a href="/algo/{topic}/test">Take Quiz</a>' in html, f"Quiz link missing on {topic} info page"
+            assert html.count('<nav class="main-nav">') == 1, f"Should have exactly one navigation element on {topic} info page"
+            assert html.count('<h1 class="site-title">') == 1, f"Should have exactly one site title on {topic} info page"
+            
+            # Test test page
+            response = self.app.get(f'/algo/{topic}/test')
+            assert response.status_code == 200, f"Test page for {topic} should return 200"
+            html = response.data.decode()
+            
+            # Check header count on test page
+            assert html.count('<header class="header">') == 1, f"Should have exactly one header element on {topic} test page"
+            assert '<h1 class="site-title"><a href="/">CS Algorithms Quiz</a></h1>' in html, f"Site title missing on {topic} test page"
+            assert '<nav class="main-nav">' in html, f"Navigation missing on {topic} test page"
+            assert '<a href="/">Home</a>' in html, f"Home link missing on {topic} test page"
+            assert html.count('<nav class="main-nav">') == 1, f"Should have exactly one navigation element on {topic} test page"
+            assert html.count('<h1 class="site-title">') == 1, f"Should have exactly one site title on {topic} test page"
+
 if __name__ == '__main__':
     unittest.main() 
