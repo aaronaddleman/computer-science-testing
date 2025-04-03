@@ -1,5 +1,7 @@
 import unittest
 import json
+import os
+import random
 from app import app
 
 class TestApp(unittest.TestCase):
@@ -8,23 +10,17 @@ class TestApp(unittest.TestCase):
         self.app = app.test_client()
         self.app.testing = True
         
-        # Known test data from our question bank
+        # Load questions from JSON file
+        questions_file = os.path.join(os.path.dirname(__file__), 'questions', 'binary_search_tree.json')
+        with open(questions_file, 'r') as f:
+            data = json.load(f)
+            self.all_questions = {q['id']: q for q in data['questions']}
+            
+        # Select 10 random questions for testing
+        question_ids = list(self.all_questions.keys())
         self.test_questions = {
-            "bst-1": {
-                "question": "What is the time complexity of searching in a balanced binary search tree?",
-                "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-                "correct_answer": 1
-            },
-            "bst-2": {
-                "question": "Which traversal of a binary search tree visits nodes in ascending order?",
-                "options": ["Preorder", "Inorder", "Postorder", "Level-order"],
-                "correct_answer": 1
-            },
-            "bst-3": {
-                "question": "What is the space complexity of a binary search tree with n nodes?",
-                "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
-                "correct_answer": 2
-            }
+            qid: self.all_questions[qid] 
+            for qid in random.sample(question_ids, min(10, len(question_ids)))
         }
 
     def test_home_page(self):
@@ -48,17 +44,20 @@ class TestApp(unittest.TestCase):
         self.assertIn(b'Binary Search Tree Test', response.data)
         
         # Verify that we got a valid question from our question bank
-        for question_id, question_data in self.test_questions.items():
-            if question_data['question'].encode() in response.data:
+        response_text = response.data.decode()
+        found_valid_question = False
+        for question_id, question_data in self.all_questions.items():
+            if question_data['question'] in response_text:
                 # Found a valid question, verify its options are present
                 for option in question_data['options']:
-                    self.assertIn(option.encode(), response.data)
+                    self.assertIn(option, response_text)
+                found_valid_question = True
                 break
-        else:
-            self.fail("No valid question found in response")
+        
+        self.assertTrue(found_valid_question, "No valid question found in response")
 
-    def test_answer_validation(self):
-        """Test answer validation for each known question"""
+    def test_random_questions(self):
+        """Test 10 random questions with both correct and incorrect answers"""
         for question_id, question_data in self.test_questions.items():
             # Test correct answer
             response = self.app.post('/api/validate-answer',
@@ -72,7 +71,9 @@ class TestApp(unittest.TestCase):
             data = json.loads(response.data)
             self.assertTrue(isinstance(data, dict))
             self.assertIn('correct', data)
+            self.assertTrue(data['correct'], f"Question {question_id} failed with correct answer")
             self.assertIn('explanation', data)
+            self.assertEqual(data['explanation'], question_data['explanation'])
 
             # Test incorrect answer
             wrong_answer = (question_data['correct_answer'] + 1) % len(question_data['options'])
@@ -87,6 +88,7 @@ class TestApp(unittest.TestCase):
             data = json.loads(response.data)
             self.assertTrue(isinstance(data, dict))
             self.assertIn('correct', data)
+            self.assertFalse(data['correct'], f"Question {question_id} incorrectly marked wrong answer as correct")
             self.assertIn('explanation', data)
 
     def test_invalid_question(self):
