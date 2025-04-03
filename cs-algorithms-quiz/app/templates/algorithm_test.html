@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <title>{{ topic.name }} Test - CS Algorithms Quiz</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ topic.name }} Test</h1>
+        
+        <div id="question-container">
+            <p>{{ question.question }}</p>
+            {% for option in question.options %}
+            <div class="option" onclick="submitAnswer({{ loop.index0 }})">{{ option }}</div>
+            {% endfor %}
+        </div>
+
+        <div id="result" style="display: none;">
+            <p id="result-text"></p>
+            <div id="explanation" class="explanation" style="display: none;"></div>
+        </div>
+
+        <a href="{{ request.path }}" class="button" id="next-button" style="display: none;">Next Question</a>
+        <a href="/" class="button">Back to Topics</a>
+    </div>
+
+    <script>
+        let hasAnswered = false;
+
+        function fireConfetti() {
+            const duration = 2000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff']
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        function submitAnswer(selectedIndex) {
+            if (hasAnswered) return;
+            
+            fetch('/api/validate-answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    topic: '{{ request.path.split("/")[2] }}',
+                    question_id: '{{ question.id }}',
+                    answer: selectedIndex
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hasAnswered = true;
+                const resultDiv = document.getElementById('result');
+                const resultText = document.getElementById('result-text');
+                const explanation = document.getElementById('explanation');
+                const nextButton = document.getElementById('next-button');
+                
+                resultDiv.style.display = 'block';
+                resultText.className = data.correct ? 'correct' : 'incorrect';
+                resultText.textContent = data.correct ? 'Correct!' : 'Incorrect!';
+                
+                explanation.style.display = 'block';
+                explanation.innerHTML = `<strong>Explanation:</strong> ${data.explanation}`;
+                
+                nextButton.style.display = 'inline-block';
+                
+                // Disable all options after answering
+                document.querySelectorAll('.option').forEach(option => {
+                    option.style.pointerEvents = 'none';
+                    option.style.opacity = '0.7';
+                });
+
+                // Fire confetti if answer is correct
+                if (data.correct) {
+                    fireConfetti();
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
