@@ -1,0 +1,185 @@
+<div class="examples-section">
+    <h2>Dynamic Programming Examples</h2>
+
+    <div class="example">
+        <h3>Example 1: Fibonacci Sequence</h3>
+        <p>A classic example demonstrating both memoization and tabulation approaches.</p>
+
+        <div class="implementation">
+            <h4>Top-Down (Memoization)</h4>
+            <pre><code class="language-python">def fibonacci_memo(n, memo=None):
+    if memo is None:
+        memo = {}
+    if n <= 1:
+        return n
+    if n not in memo:
+        memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
+    return memo[n]
+
+# Usage
+result = fibonacci_memo(10)  # Returns 55</code></pre>
+
+            <h4>Bottom-Up (Tabulation)</h4>
+            <pre><code class="language-python">def fibonacci_tab(n):
+    if n <= 1:
+        return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+
+# Usage
+result = fibonacci_tab(10)  # Returns 55</code></pre>
+        </div>
+    </div>
+
+    <div class="example">
+        <h3>Example 2: 0/1 Knapsack Problem</h3>
+        <p>A fundamental DP problem where we need to select items with maximum value while staying within a weight constraint.</p>
+
+        <div class="implementation">
+            <pre><code class="language-python">def knapsack(values, weights, capacity):
+    n = len(values)
+    dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
+    
+    for i in range(1, n + 1):
+        for w in range(capacity + 1):
+            if weights[i-1] <= w:
+                dp[i][w] = max(
+                    values[i-1] + dp[i-1][w-weights[i-1]],
+                    dp[i-1][w]
+                )
+            else:
+                dp[i][w] = dp[i-1][w]
+    
+    return dp[n][capacity]
+
+# Usage
+values = [60, 100, 120]
+weights = [10, 20, 30]
+capacity = 50
+result = knapsack(values, weights, capacity)  # Returns 220</code></pre>
+        </div>
+    </div>
+
+    <div class="example">
+        <h3>Example 3: Longest Common Subsequence</h3>
+        <p>Finding the longest sequence that appears in both strings in the same order.</p>
+
+        <div class="implementation">
+            <pre><code class="language-python">def lcs(str1, str2):
+    m, n = len(str1), len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i-1] == str2[j-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    
+    # Reconstruct the sequence
+    lcs = []
+    i, j = m, n
+    while i > 0 and j > 0:
+        if str1[i-1] == str2[j-1]:
+            lcs.append(str1[i-1])
+            i -= 1
+            j -= 1
+        elif dp[i-1][j] > dp[i][j-1]:
+            i -= 1
+        else:
+            j -= 1
+    
+    return ''.join(reversed(lcs))
+
+# Usage
+result = lcs("ABCDGH", "AEDFHR")  # Returns "ADH"</code></pre>
+        </div>
+    </div>
+
+    <div class="example">
+        <h3>Example 4: Edit Distance</h3>
+        <p>Finding the minimum number of operations (insert, delete, replace) to transform one string into another.</p>
+
+        <div class="implementation">
+            <pre><code class="language-python">def edit_distance(str1, str2):
+    m, n = len(str1), len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    
+    # Initialize first row and column
+    for i in range(m + 1):
+        dp[i][0] = i
+    for j in range(n + 1):
+        dp[0][j] = j
+    
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i-1] == str2[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = 1 + min(
+                    dp[i-1][j],    # deletion
+                    dp[i][j-1],    # insertion
+                    dp[i-1][j-1]   # replacement
+                )
+    
+    return dp[m][n]
+
+# Usage
+result = edit_distance("kitten", "sitting")  # Returns 3</code></pre>
+        </div>
+    </div>
+</div>
+
+<style>
+.examples-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.example {
+    margin-bottom: 2em;
+}
+
+h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5em;
+    margin-top: 1.5em;
+}
+
+h4 {
+    color: #2c3e50;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.implementation {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+pre {
+    margin: 0;
+    padding: 1em;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+p {
+    line-height: 1.6;
+    margin: 1em 0;
+}
+</style> 

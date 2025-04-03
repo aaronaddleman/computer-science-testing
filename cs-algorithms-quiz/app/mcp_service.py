@@ -48,9 +48,9 @@ class MCPService:
         # Include difficulty in the question data
         return {
             'id': question['id'],
-            'text': question['text'],
+            'question': question['question'],  # Changed from 'text' to 'question'
             'options': question['options'],
-            'difficulty': question.get('difficulty', 'medium')  # Default to medium if not specified
+            'difficulty': question.get('difficulty', 'medium').lower()  # Default to medium if not specified, ensure lowercase
         }
 
     def validate_answer(self, topic_id, question_id, answer):
@@ -67,9 +67,12 @@ class MCPService:
         if not question:
             return {'correct': False, 'message': 'Invalid question'}
         
-        correct = str(answer) == str(question['correct_answer'])
+        # Get the correct answer option from the index
+        correct_answer = question['options'][question['correct_answer']]
+        correct = str(answer) == str(correct_answer)
+        
         return {
             'correct': correct,
             'message': question['explanation'] if correct else 'Incorrect answer. Try again!',
-            'difficulty': question.get('difficulty', 'medium')  # Include difficulty in response
+            'difficulty': question.get('difficulty', 'medium').lower()  # Include difficulty in response, ensure lowercase
         } 

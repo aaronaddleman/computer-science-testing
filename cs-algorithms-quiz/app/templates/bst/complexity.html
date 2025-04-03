@@ -1,0 +1,144 @@
+<div class="complexity-section">
+    <h2>BST Time and Space Complexity Analysis</h2>
+
+    <div class="complexity-overview">
+        <p>The performance of Binary Search Tree operations varies significantly between average and worst cases, depending on the tree's balance.</p>
+    </div>
+
+    <table class="complexity-table">
+        <thead>
+            <tr>
+                <th>Operation</th>
+                <th>Average Case</th>
+                <th>Worst Case</th>
+                <th>Space</th>
+                <th>When Balanced</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Search</td>
+                <td>O(log n)</td>
+                <td>O(n)</td>
+                <td>O(1)</td>
+                <td>O(log n)</td>
+            </tr>
+            <tr>
+                <td>Insert</td>
+                <td>O(log n)</td>
+                <td>O(n)</td>
+                <td>O(1)</td>
+                <td>O(log n)</td>
+            </tr>
+            <tr>
+                <td>Delete</td>
+                <td>O(log n)</td>
+                <td>O(n)</td>
+                <td>O(1)</td>
+                <td>O(log n)</td>
+            </tr>
+            <tr>
+                <td>Traversal</td>
+                <td>O(n)</td>
+                <td>O(n)</td>
+                <td>O(h)*</td>
+                <td>O(n)</td>
+            </tr>
+            <tr>
+                <td>Find Min/Max</td>
+                <td>O(log n)</td>
+                <td>O(n)</td>
+                <td>O(1)</td>
+                <td>O(log n)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="complexity-notes">
+        <h3>Important Notes</h3>
+        <ul>
+            <li>* Space complexity for traversal refers to the recursion stack depth (h = height of tree)</li>
+            <li>Worst case occurs in a skewed tree (essentially a linked list)</li>
+            <li>Average case assumes random insertions maintaining relative balance</li>
+            <li>Balanced trees (AVL, Red-Black) guarantee O(log n) operations</li>
+        </ul>
+    </div>
+
+    <div class="balanced-comparison">
+        <h3>Self-Balancing BST Variants</h3>
+        <table class="complexity-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Height Bound</th>
+                    <th>Balance Method</th>
+                    <th>Use Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AVL Tree</td>
+                    <td>1.44 log n</td>
+                    <td>Strict balancing</td>
+                    <td>Frequent lookups</td>
+                </tr>
+                <tr>
+                    <td>Red-Black Tree</td>
+                    <td>2 log n</td>
+                    <td>Relaxed balancing</td>
+                    <td>Frequent updates</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+.complexity-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.complexity-table th,
+.complexity-table td {
+    padding: 0.75em;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.complexity-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.complexity-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.complexity-notes {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.complexity-notes ul {
+    margin-top: 0.5em;
+}
+
+.balanced-comparison {
+    margin-top: 2em;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-top: 1.5em;
+}
+</style> 

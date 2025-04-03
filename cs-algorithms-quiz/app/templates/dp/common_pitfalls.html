@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pitfalls-section">
+    <h2>Common Dynamic Programming Pitfalls and Solutions</h2>
+
+    <div class="pitfall-category">
+        <h3>Problem Understanding Issues</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Incorrect Problem Decomposition</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Failing to identify the correct subproblems or their relationships.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Start with small examples and trace the solution manually</li>
+                    <li>Identify overlapping subproblems explicitly</li>
+                    <li>Draw recursion trees to understand the problem structure</li>
+                    <li>Verify that subproblems are independent</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Missing Base Cases</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Not handling edge cases or incorrect base case values.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Test with boundary inputs (empty, single element, etc.)</li>
+                    <li>Verify base case values with small examples</li>
+                    <li>Consider all possible minimal valid inputs</li>
+                    <li>Document why each base case value is chosen</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Implementation Mistakes</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Incorrect State Definition</h4>
+            <div class="problem">
+                <strong>Problem:</strong> State variables don't capture all necessary information for solving subproblems.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>List all variables that affect the decision at each step</li>
+                    <li>Ensure state uniquely identifies each subproblem</li>
+                    <li>Validate state transitions maintain necessary information</li>
+                    <li>Consider using additional state variables if needed</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Memoization Errors</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Incorrect cache key construction or cache updates.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use tuples for multi-dimensional states</li>
+                    <li>Clear cache when necessary</li>
+                    <li>Ensure cache key uniquely identifies the state</li>
+                    <li>Consider using string representations for complex states</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Performance Issues</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Unnecessary Recalculation</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Redundant computation of already solved subproblems.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Implement proper memoization/tabulation</li>
+                    <li>Verify cache hits are working as expected</li>
+                    <li>Consider bottom-up approach for better performance</li>
+                    <li>Use appropriate data structures for quick lookups</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Memory Management</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Excessive memory usage or stack overflow in recursive solutions.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use space optimization techniques (rolling array, state compression)</li>
+                    <li>Consider iterative solutions for deep recursion</li>
+                    <li>Clear unnecessary cached values</li>
+                    <li>Use appropriate data types to minimize memory usage</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Testing and Debugging</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Insufficient Test Cases</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Not testing all edge cases and boundary conditions.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Test with empty/minimal inputs</li>
+                    <li>Include large inputs for performance testing</li>
+                    <li>Test boundary conditions thoroughly</li>
+                    <li>Create test cases for each base case</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Debugging Complexity</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Difficulty in tracking state changes and identifying issues.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Add logging for state transitions</li>
+                    <li>Visualize the DP table for small inputs</li>
+                    <li>Use debugger to track recursive calls</li>
+                    <li>Implement solution verification steps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.pitfalls-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pitfall-category {
+    margin-bottom: 2em;
+}
+
+.pitfall-item {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.pitfall-item h4 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.problem, .solution {
+    margin: 0.5em 0;
+}
+
+.solution ul {
+    margin-top: 0.5em;
+    padding-left: 20px;
+}
+
+.solution li {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5em;
+    margin-top: 1.5em;
+}
+
+strong {
+    color: #2c3e50;
+}
+
+.problem {
+    border-left: 3px solid #dc3545;
+    padding-left: 1em;
+    margin: 1em 0;
+}
+
+.solution {
+    border-left: 3px solid #28a745;
+    padding-left: 1em;
+    margin: 1em 0;
+}
+</style>
+{% endblock %}
+{% endblock %} 

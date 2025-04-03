@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Computer Science Algorithms</h1>
+    <div class="topics-grid">
+        <div class="topic-card">
+            <h2>Data Structures</h2>
+            <ul>
+                <li>
+                    <a href="/algo/binary-search-tree/info">
+                        <span class="topic-name">Binary Search Tree</span>
+                        <span class="topic-description">Learn about tree structures and operations</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="topic-card">
+            <h2>Algorithms</h2>
+            <ul>
+                <li>
+                    <a href="/algo/sorting-algorithms/info">
+                        <span class="topic-name">Sorting Algorithms</span>
+                        <span class="topic-description">Master different sorting techniques</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/algo/graph-algorithms/info">
+                        <span class="topic-name">Graph Algorithms</span>
+                        <span class="topic-description">Explore graph traversal and analysis</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="topic-card">
+            <h2>Problem Solving</h2>
+            <ul>
+                <li>
+                    <a href="/algo/dynamic-programming/info">
+                        <span class="topic-name">Dynamic Programming</span>
+                        <span class="topic-description">Learn optimization through subproblems</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.topic-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.topic-card h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.topic-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topic-card li {
+    margin: 15px 0;
+}
+
+.topic-card a {
+    display: block;
+    text-decoration: none;
+    color: #2c3e50;
+    padding: 15px;
+    border-radius: 6px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.topic-card a:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.topic-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.topic-description {
+    display: block;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .topic-card {
+        margin-bottom: 20px;
+    }
+}
+</style>
+{% endblock %}
+{% endblock %} 

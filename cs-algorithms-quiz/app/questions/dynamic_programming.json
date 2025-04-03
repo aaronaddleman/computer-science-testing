@@ -1,49 +1,94 @@
 {
-    "topic": "dynamic-programming",
-    "name": "Dynamic Programming",
-    "description": "Questions about dynamic programming concepts, optimization problems, and common DP patterns.",
+    "topic": "Dynamic Programming",
+    "description": "Master the art of solving complex problems by breaking them down into simpler subproblems.",
+    "content_files": {
+        "overview": "templates/dp/overview.html",
+        "examples": "templates/dp/examples.html",
+        "complexity": "templates/dp/complexity.html",
+        "common_pitfalls": "templates/dp/common_pitfalls.html"
+    },
+    "images": {
+        "fibonacci_tree": "static/images/fibonacci_tree.svg",
+        "knapsack_table": "static/images/knapsack_table.svg",
+        "lcs_matrix": "static/images/lcs_matrix.svg"
+    },
+    "key_concepts": [
+        "Optimal substructure and overlapping subproblems",
+        "Memoization vs Tabulation approaches",
+        "State definition and transitions",
+        "Space optimization techniques",
+        "Common DP patterns and problem types"
+    ],
     "questions": [
         {
-            "id": "dp-1",
-            "category": "Basic Concepts",
-            "text": "What are the two key properties required for a problem to be solved using dynamic programming?",
+            "id": "dp_approach",
+            "category": "Fundamentals",
+            "difficulty": "Easy",
+            "question": "Which of the following is NOT a requirement for applying dynamic programming?",
             "options": [
-                "Recursion and iteration",
-                "Optimal substructure and overlapping subproblems",
-                "Memoization and tabulation",
-                "Greedy choice and backtracking"
+                "Optimal substructure",
+                "Overlapping subproblems",
+                "Problem can be solved recursively",
+                "Problem must involve arrays"
             ],
-            "correct_answer": "Optimal substructure and overlapping subproblems",
-            "explanation": "DP requires optimal substructure (optimal solution contains optimal subsolutions) and overlapping subproblems (same subproblems are encountered multiple times).",
-            "difficulty": "medium"
+            "correct_answer": 3,
+            "explanation": "Dynamic programming requires optimal substructure and overlapping subproblems. While many DP problems involve arrays, it's not a requirement. Problems can involve strings, trees, or other data structures."
         },
         {
-            "id": "dp-2",
+            "id": "memoization_vs_tabulation",
             "category": "Implementation",
-            "text": "What is the primary difference between memoization and tabulation?",
+            "difficulty": "Medium",
+            "question": "Which approach typically uses less memory in dynamic programming solutions?",
             "options": [
-                "Time complexity",
-                "Space complexity",
-                "Top-down vs Bottom-up approach",
-                "Recursive vs Iterative"
+                "Top-down (Memoization)",
+                "Bottom-up (Tabulation)",
+                "Both use the same amount of memory",
+                "Depends on the specific problem"
             ],
-            "correct_answer": "Top-down vs Bottom-up approach",
-            "explanation": "Memoization is top-down (recursive with caching), while tabulation is bottom-up (iterative building of solution).",
-            "difficulty": "medium"
+            "correct_answer": 1,
+            "explanation": "Bottom-up (Tabulation) typically uses less memory as it doesn't require recursive stack space and can often be optimized to use only necessary states. Top-down requires additional space for the recursion stack."
         },
         {
-            "id": "dp-3",
-            "category": "Applications",
-            "text": "Which problem is NOT typically solved using dynamic programming?",
+            "id": "state_definition",
+            "category": "Problem Solving",
+            "difficulty": "Hard",
+            "question": "What is the most important consideration when defining states in a DP solution?",
             "options": [
-                "Longest Common Subsequence",
-                "Finding shortest path in unweighted graph",
-                "0/1 Knapsack",
-                "Matrix Chain Multiplication"
+                "Minimizing the number of states",
+                "Making states easy to compute",
+                "Ensuring states capture all necessary information",
+                "Using simple data types for states"
             ],
-            "correct_answer": "Finding shortest path in unweighted graph",
-            "explanation": "Finding shortest path in unweighted graph is typically solved using BFS, not DP, as it doesn't have overlapping subproblems.",
-            "difficulty": "hard"
+            "correct_answer": 2,
+            "explanation": "The most important aspect is ensuring that states capture all information needed to solve subproblems correctly. Missing information in state definition leads to incorrect solutions, regardless of other optimizations."
+        },
+        {
+            "id": "space_optimization",
+            "category": "Optimization",
+            "difficulty": "Hard",
+            "question": "Which technique is most effective for optimizing space in DP solutions?",
+            "options": [
+                "Using global variables",
+                "Rolling array technique",
+                "Recursive implementation",
+                "Using larger data types"
+            ],
+            "correct_answer": 1,
+            "explanation": "The rolling array technique is most effective for space optimization as it reuses space by keeping only necessary previous states, often reducing space complexity from O(n) to O(1) or O(k) where k is small."
         }
+    ],
+    "common_mistakes": [
+        "Not identifying all necessary state variables",
+        "Incorrect base case handling",
+        "Inefficient state transitions",
+        "Not considering space optimization",
+        "Poor memoization implementation"
+    ],
+    "best_practices": [
+        "Start with small examples to understand the problem",
+        "Draw out the recursion tree to identify overlapping subproblems",
+        "Consider both top-down and bottom-up approaches",
+        "Optimize space usage when possible",
+        "Test with various edge cases"
     ]
 } 

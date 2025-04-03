@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="complexity-section">
+    <h2>Graph Algorithm Time and Space Complexity Analysis</h2>
+
+    <div class="complexity-overview">
+        <p>The performance of graph algorithms depends on the graph's representation (adjacency matrix vs. adjacency list) and properties (directed, weighted, etc.).</p>
+    </div>
+
+    <div class="representation-complexity">
+        <h3>Graph Representation Complexities</h3>
+        <table class="complexity-table">
+            <thead>
+                <tr>
+                    <th>Operation</th>
+                    <th>Adjacency Matrix</th>
+                    <th>Adjacency List</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Storage</td>
+                    <td>O(V²)</td>
+                    <td>O(V + E)</td>
+                    <td>List is better for sparse graphs</td>
+                </tr>
+                <tr>
+                    <td>Add Edge</td>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                    <td>Both are efficient</td>
+                </tr>
+                <tr>
+                    <td>Remove Edge</td>
+                    <td>O(1)</td>
+                    <td>O(E)</td>
+                    <td>Matrix is better for edge updates</td>
+                </tr>
+                <tr>
+                    <td>Find Edge</td>
+                    <td>O(1)</td>
+                    <td>O(V)</td>
+                    <td>Matrix provides direct access</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="algorithm-complexity">
+        <h3>Algorithm Time Complexities</h3>
+        <table class="complexity-table">
+            <thead>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Time (Matrix)</th>
+                    <th>Time (List)</th>
+                    <th>Space</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BFS</td>
+                    <td>O(V²)</td>
+                    <td>O(V + E)</td>
+                    <td>O(V)</td>
+                    <td>Level-order traversal</td>
+                </tr>
+                <tr>
+                    <td>DFS</td>
+                    <td>O(V²)</td>
+                    <td>O(V + E)</td>
+                    <td>O(V)</td>
+                    <td>Recursive stack space</td>
+                </tr>
+                <tr>
+                    <td>Dijkstra's</td>
+                    <td>O(V²)</td>
+                    <td>O((V + E) log V)</td>
+                    <td>O(V)</td>
+                    <td>With binary heap</td>
+                </tr>
+                <tr>
+                    <td>Bellman-Ford</td>
+                    <td>O(V³)</td>
+                    <td>O(VE)</td>
+                    <td>O(V)</td>
+                    <td>Handles negative weights</td>
+                </tr>
+                <tr>
+                    <td>Prim's MST</td>
+                    <td>O(V²)</td>
+                    <td>O((V + E) log V)</td>
+                    <td>O(V)</td>
+                    <td>Minimum spanning tree</td>
+                </tr>
+                <tr>
+                    <td>Kruskal's MST</td>
+                    <td>O(E log E)</td>
+                    <td>O(E log E)</td>
+                    <td>O(V)</td>
+                    <td>Using Union-Find</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="complexity-notes">
+        <h3>Important Notes</h3>
+        <ul>
+            <li>V = number of vertices, E = number of edges</li>
+            <li>For sparse graphs (E ≈ V), adjacency list is more efficient</li>
+            <li>For dense graphs (E ≈ V²), both representations are comparable</li>
+            <li>Space complexity often includes the graph representation</li>
+        </ul>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.complexity-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.complexity-table th,
+.complexity-table td {
+    padding: 0.75em;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.complexity-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.complexity-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.complexity-notes {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.complexity-notes ul {
+    margin-top: 0.5em;
+    padding-left: 20px;
+}
+
+.complexity-notes li {
+    margin: 5px 0;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-top: 1.5em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5em;
+}
+</style>
+{% endblock %}
+{% endblock %} 
