@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <title>{{ topic.name }} Test - CS Algorithms Quiz</title>
 </head>
 <body>
@@ -12,93 +12,129 @@
         <h1>{{ topic.name }} Test</h1>
         
         <div id="question-container">
-            <p>{{ question.question }}</p>
-            {% for option in question.options %}
-            <div class="option" onclick="submitAnswer({{ loop.index0 }})">{{ option }}</div>
-            {% endfor %}
+            <p class="question">{{ question.text }}</p>
+            <div class="difficulty-badge {{ question.difficulty }}">
+                {{ question.difficulty|upper }}
+            </div>
+            <div class="options">
+                {% for option in question.options %}
+                <button class="option" onclick="submitAnswer('{{ option }}')">{{ option }}</button>
+                {% endfor %}
+            </div>
+            <div id="result" class="result"></div>
+            <a href="/" class="home-link">Back to Topics</a>
         </div>
-
-        <div id="result" style="display: none;">
-            <p id="result-text"></p>
-            <div id="explanation" class="explanation" style="display: none;"></div>
-        </div>
-
-        <a href="{{ request.path }}" class="button" id="next-button" style="display: none;">Next Question</a>
-        <a href="/" class="button">Back to Topics</a>
     </div>
 
     <script>
+        let startTime = Date.now();
         let hasAnswered = false;
 
         function fireConfetti() {
-            const duration = 2000;
-            const end = Date.now() + duration;
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 }
+            };
 
-            (function frame() {
+            function fire(particleRatio, opts) {
                 confetti({
-                    particleCount: 7,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff0000', '#00ff00', '#0000ff']
+                    ...defaults,
+                    ...opts,
+                    particleCount: Math.floor(count * particleRatio)
                 });
-                confetti({
-                    particleCount: 7,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff0000', '#00ff00', '#0000ff']
-                });
+            }
 
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
         }
 
-        function submitAnswer(selectedIndex) {
-            if (hasAnswered) return;
-            
+        function submitAnswer(answer) {
+            if (hasAnswered) {
+                return;
+            }
+
+            const responseTime = (Date.now() - startTime) / 1000;  // Convert to seconds
+            hasAnswered = true;
+
             fetch('/api/validate-answer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    topic: '{{ request.path.split("/")[2] }}',
+                    topic: '{{ topic.topic }}',
                     question_id: '{{ question.id }}',
-                    answer: selectedIndex
+                    answer: answer,
+                    response_time: responseTime
                 })
             })
             .then(response => response.json())
             .then(data => {
-                hasAnswered = true;
                 const resultDiv = document.getElementById('result');
-                const resultText = document.getElementById('result-text');
-                const explanation = document.getElementById('explanation');
-                const nextButton = document.getElementById('next-button');
-                
-                resultDiv.style.display = 'block';
-                resultText.className = data.correct ? 'correct' : 'incorrect';
-                resultText.textContent = data.correct ? 'Correct!' : 'Incorrect!';
-                
-                explanation.style.display = 'block';
-                explanation.innerHTML = `<strong>Explanation:</strong> ${data.explanation}`;
-                
-                nextButton.style.display = 'inline-block';
-                
-                // Disable all options after answering
-                document.querySelectorAll('.option').forEach(option => {
-                    option.style.pointerEvents = 'none';
-                    option.style.opacity = '0.7';
-                });
-
-                // Fire confetti if answer is correct
                 if (data.correct) {
+                    resultDiv.innerHTML = `<p class="correct">Correct! ${data.message}</p>`;
                     fireConfetti();
+                } else {
+                    resultDiv.innerHTML = `<p class="incorrect">${data.message}</p>`;
                 }
+                
+                // Add a "Next Question" button after answering
+                resultDiv.innerHTML += '<button onclick="location.reload()" class="next-button">Next Question</button>';
             });
         }
     </script>
+
+    <style>
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .easy {
+            background-color: #4CAF50;
+        }
+        .medium {
+            background-color: #FF9800;
+        }
+        .hard {
+            background-color: #F44336;
+        }
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .next-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </body>
 </html> 

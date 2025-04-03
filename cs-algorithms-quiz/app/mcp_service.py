@@ -4,65 +4,72 @@ import os
 
 class MCPService:
     def __init__(self):
-        self.question_bank = {}
-        self.topic_info = {}
-        self.current_questions = {}
-        self._load_questions()
+        self.questions_dir = os.path.join(os.path.dirname(__file__), 'questions')
+        self.topics = {}
+        self.load_topics()
 
-    def _load_questions(self):
-        """Load questions from JSON files in the questions directory."""
-        questions_dir = os.path.join(os.path.dirname(__file__), 'questions')
-        for filename in os.listdir(questions_dir):
+    def load_topics(self):
+        """Load all topic files from the questions directory."""
+        for filename in os.listdir(self.questions_dir):
             if filename.endswith('.json'):
-                file_path = os.path.join(questions_dir, filename)
-                with open(file_path, 'r') as f:
-                    topic_data = json.load(f)
-                    topic = topic_data['topic']
-                    self.question_bank[topic] = topic_data['questions']
-                    # Store topic info separately
-                    self.topic_info[topic] = {
-                        'name': topic_data['name'],
-                        'description': topic_data['description']
-                    }
+                # Support both hyphen and underscore formats
+                topic_id = filename.replace('.json', '').replace('_', '-')
+                with open(os.path.join(self.questions_dir, filename)) as f:
+                    self.topics[topic_id] = json.load(f)
 
-    def get_topic_info(self, topic):
-        """Get information about a specific topic."""
-        if topic not in self.topic_info:
+    def get_topic_info(self, topic_id):
+        """Get topic information without questions."""
+        if topic_id not in self.topics:
             return None
-        return self.topic_info[topic]
+        topic_data = self.topics[topic_id].copy()
+        topic_data.pop('questions', None)  # Remove questions from the response
+        return topic_data
 
-    def generate_question(self, topic):
+    def get_question_info(self, topic_id, question_id):
+        """Get information about a specific question."""
+        if topic_id not in self.topics:
+            return None
+        
+        for question in self.topics[topic_id].get('questions', []):
+            if question['id'] == question_id:
+                return question
+        return None
+
+    def generate_question(self, topic_id):
         """Generate a random question for the given topic."""
-        if topic not in self.question_bank:
+        if topic_id not in self.topics:
             return None
         
-        # Randomly select a question from the bank
-        question = random.choice(self.question_bank[topic])
+        questions = self.topics[topic_id].get('questions', [])
+        if not questions:
+            return None
         
-        # Store the current question (in a real implementation, this would be session-specific)
-        self.current_questions[topic] = question
-        
-        # Return question without the correct answer and explanation
+        question = random.choice(questions)
+        # Include difficulty in the question data
         return {
-            "id": question["id"],
-            "question": question["question"],
-            "options": question["options"]
+            'id': question['id'],
+            'text': question['text'],
+            'options': question['options'],
+            'difficulty': question.get('difficulty', 'medium')  # Default to medium if not specified
         }
 
-    def validate_answer(self, topic, question_id, answer):
-        """Validate an answer for a specific question."""
-        if topic not in self.question_bank:
-            return {"correct": False, "message": "Invalid topic"}
-
-        # Find the question with the matching ID
-        matching_questions = [q for q in self.question_bank[topic] if q["id"] == question_id]
-        if not matching_questions:
-            return {"correct": False, "message": "Invalid question"}
-
-        question = matching_questions[0]
-        is_correct = answer == question["correct_answer"]
+    def validate_answer(self, topic_id, question_id, answer):
+        """Validate the answer for a given question."""
+        if topic_id not in self.topics:
+            return {'correct': False, 'message': 'Invalid topic'}
         
+        question = None
+        for q in self.topics[topic_id].get('questions', []):
+            if q['id'] == question_id:
+                question = q
+                break
+        
+        if not question:
+            return {'correct': False, 'message': 'Invalid question'}
+        
+        correct = str(answer) == str(question['correct_answer'])
         return {
-            "correct": is_correct,
-            "explanation": question["explanation"]
+            'correct': correct,
+            'message': question['explanation'] if correct else 'Incorrect answer. Try again!',
+            'difficulty': question.get('difficulty', 'medium')  # Include difficulty in response
         } 

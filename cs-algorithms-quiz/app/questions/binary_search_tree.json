@@ -1,587 +1,627 @@
 {
     "topic": "binary-search-tree",
     "name": "Binary Search Tree",
-    "description": "Questions about Binary Search Tree data structure, its properties, operations, and applications.",
+    "description": "Test your knowledge of Binary Search Trees (BST), their properties, operations, and time complexities.",
     "questions": [
         {
             "id": "bst-1",
             "category": "Basic Concepts and Properties",
-            "question": "What is the time complexity of searching in a balanced binary search tree?",
+            "text": "What is the time complexity of searching for a value in a balanced binary search tree?",
             "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-            "correct_answer": 1,
-            "explanation": "In a balanced BST, each comparison eliminates half of the remaining nodes."
+            "correct_answer": "O(log n)",
+            "explanation": "In a balanced BST, each comparison eliminates half of the remaining nodes, resulting in O(log n) time complexity.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-2",
             "category": "Basic Concepts and Properties",
-            "question": "What property must be maintained for all nodes in a binary search tree?",
+            "text": "Which of the following properties must be maintained in a binary search tree?",
             "options": [
-                "Left child must be red, right child must be black",
-                "All nodes must have exactly two children",
-                "Left subtree values < node value < right subtree values",
-                "The difference in height between left and right subtrees must be at most 1"
+                "Left child must be greater than parent",
+                "Right child must be less than parent",
+                "Left subtree values must be less than parent and right subtree values must be greater than parent",
+                "Left and right children must have equal values"
             ],
-            "correct_answer": 2,
-            "explanation": "The BST property states that all values in the left subtree must be less than the node's value, and all values in the right subtree must be greater."
+            "correct_answer": "Left subtree values must be less than parent and right subtree values must be greater than parent",
+            "explanation": "This is the fundamental property of a BST that enables efficient searching.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-3",
-            "category": "Basic Concepts and Properties",
-            "question": "What is the space complexity of a binary search tree with n nodes?",
-            "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
-            "correct_answer": 2,
-            "explanation": "Each node requires constant space, and there are n nodes in total."
+            "category": "Performance and Optimization",
+            "text": "What is the time complexity of inserting a value into an unbalanced binary search tree in the worst case?",
+            "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+            "correct_answer": "O(n)",
+            "explanation": "In the worst case (when the tree becomes a linear chain), insertion takes O(n) time.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-4",
-            "category": "Basic Concepts and Properties",
-            "question": "In a binary search tree, where is the smallest element located?",
-            "options": [
-                "Root node",
-                "Leftmost node",
-                "Rightmost node",
-                "Middle node"
-            ],
-            "correct_answer": 1,
-            "explanation": "The smallest element is always found at the leftmost node of the tree."
+            "category": "Performance and Optimization",
+            "text": "What is the space complexity of a binary search tree containing n nodes?",
+            "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+            "correct_answer": "O(n)",
+            "explanation": "Each node in the tree requires constant space, so the total space is proportional to the number of nodes.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-5",
-            "category": "Basic Concepts and Properties",
-            "question": "What makes a binary search tree 'balanced'?",
-            "options": [
-                "All levels are completely filled",
-                "The height difference between left and right subtrees is at most 1",
-                "All leaf nodes are at the same level",
-                "The number of nodes in left and right subtrees is exactly equal"
-            ],
-            "correct_answer": 1,
-            "explanation": "A BST is balanced when the height difference between left and right subtrees of any node is at most 1."
+            "category": "Traversal Operations",
+            "text": "In a binary search tree, which traversal method visits nodes in ascending order?",
+            "options": ["Preorder", "Inorder", "Postorder", "Level-order"],
+            "correct_answer": "Inorder",
+            "explanation": "Inorder traversal visits left subtree, then root, then right subtree, resulting in nodes being visited in ascending order.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-6",
-            "category": "Traversal Operations",
-            "question": "Which traversal visits nodes in ascending order in a BST?",
-            "options": ["Preorder", "Inorder", "Postorder", "Level-order"],
-            "correct_answer": 1,
-            "explanation": "Inorder traversal visits left subtree, root, then right subtree, producing sorted output in BST."
+            "category": "Advanced Concepts",
+            "text": "What is the minimum number of nodes in an AVL tree of height h?",
+            "options": ["h", "h+1", "2^h - 1", "Fibonacci(h)"],
+            "correct_answer": "Fibonacci(h)",
+            "explanation": "The minimum number of nodes in an AVL tree follows the Fibonacci sequence due to the balance factor constraints.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-7",
-            "category": "Traversal Operations",
-            "question": "What traversal would print the root node first?",
-            "options": ["Inorder", "Preorder", "Postorder", "Level-order"],
-            "correct_answer": 1,
-            "explanation": "Preorder traversal visits root first, then left subtree, then right subtree."
+            "category": "Advanced Concepts",
+            "text": "What is the maximum height possible for a Red-Black tree with n nodes?",
+            "options": ["log n", "2 log n", "n/2", "n"],
+            "correct_answer": "2 log n",
+            "explanation": "Red-Black trees maintain a height of at most 2 log n due to their balancing properties.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-8",
             "category": "Traversal Operations",
-            "question": "Which traversal visits the leaf nodes before their parents?",
-            "options": ["Preorder", "Inorder", "Postorder", "Level-order"],
-            "correct_answer": 2,
-            "explanation": "Postorder traversal visits all children (left then right) before visiting the parent node."
+            "text": "What traversal would print the root node first?",
+            "options": ["Inorder", "Preorder", "Postorder", "Level-order"],
+            "correct_answer": "Preorder",
+            "explanation": "Preorder traversal visits root first, then left subtree, then right subtree.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-9",
             "category": "Traversal Operations",
-            "question": "What traversal visits nodes level by level?",
+            "text": "Which traversal visits the leaf nodes before their parents?",
             "options": ["Preorder", "Inorder", "Postorder", "Level-order"],
-            "correct_answer": 3,
-            "explanation": "Level-order traversal visits nodes breadth-first, one level at a time."
+            "correct_answer": "Postorder",
+            "explanation": "Postorder traversal visits all children (left then right) before visiting the parent node.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-10",
             "category": "Traversal Operations",
-            "question": "Which data structure is typically used in level-order traversal?",
-            "options": ["Stack", "Queue", "Array", "Linked List"],
-            "correct_answer": 1,
-            "explanation": "Level-order traversal uses a queue to keep track of nodes at each level."
+            "text": "What traversal visits nodes level by level?",
+            "options": ["Preorder", "Inorder", "Postorder", "Level-order"],
+            "correct_answer": "Level-order",
+            "explanation": "Level-order traversal visits nodes breadth-first, one level at a time.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-11",
             "category": "Insertion and Deletion",
-            "question": "What is the worst-case time complexity for inserting a node?",
+            "text": "What is the worst-case time complexity for inserting a node?",
             "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-            "correct_answer": 2,
-            "explanation": "In a skewed tree, insertion might require traversing all nodes."
+            "correct_answer": "O(n)",
+            "explanation": "In a skewed tree, insertion might require traversing all nodes.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-12",
             "category": "Insertion and Deletion",
-            "question": "When deleting a node with two children, what value replaces it?",
+            "text": "When deleting a node with two children, what value replaces it?",
             "options": [
                 "Leftmost child of right subtree",
                 "Rightmost child of left subtree",
                 "Either of the above",
                 "Both children must be deleted"
             ],
-            "correct_answer": 2,
-            "explanation": "Either the inorder successor (leftmost in right subtree) or predecessor (rightmost in left subtree) can replace the deleted node."
+            "correct_answer": "Either of the above",
+            "explanation": "Either the inorder successor (leftmost in right subtree) or predecessor (rightmost in left subtree) can replace the deleted node.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-13",
             "category": "Insertion and Deletion",
-            "question": "What is the easiest case of node deletion?",
+            "text": "What is the easiest case of node deletion?",
             "options": [
                 "Leaf node",
                 "Node with one child",
                 "Node with two children",
                 "Root node"
             ],
-            "correct_answer": 0,
-            "explanation": "Deleting a leaf node is simplest as it requires no restructuring of the tree."
+            "correct_answer": "Leaf node",
+            "explanation": "Deleting a leaf node is simplest as it requires no restructuring of the tree.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-14",
             "category": "Insertion and Deletion",
-            "question": "What happens when inserting a duplicate value?",
+            "text": "What happens when inserting a duplicate value?",
             "options": [
                 "Replace the existing value",
                 "Insert in the left subtree",
                 "Insert in the right subtree",
                 "Depends on the implementation"
             ],
-            "correct_answer": 3,
-            "explanation": "Handling duplicates is implementation-specific; common approaches include replacing, adding to left/right, or maintaining a count."
+            "correct_answer": "Depends on the implementation",
+            "explanation": "Handling duplicates is implementation-specific; common approaches include replacing, adding to left/right, or maintaining a count.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-15",
             "category": "Insertion and Deletion",
-            "question": "What operation preserves the BST property during deletion?",
+            "text": "What operation preserves the BST property during deletion?",
             "options": [
                 "Rotation",
                 "Restructuring",
                 "Rebalancing",
                 "Successor replacement"
             ],
-            "correct_answer": 3,
-            "explanation": "Using the inorder successor maintains the BST property when deleting a node with two children."
+            "correct_answer": "Successor replacement",
+            "explanation": "Using the inorder successor maintains the BST property when deleting a node with two children.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-16",
             "category": "Performance and Optimization",
-            "question": "What is the best-case height of a BST with n nodes?",
+            "text": "What is the best-case height of a BST with n nodes?",
             "options": ["log₂(n)", "log₂(n+1)", "⌊log₂(n)⌋", "⌈log₂(n+1)⌉"],
-            "correct_answer": 2,
-            "explanation": "The minimum height is achieved in a perfectly balanced tree."
+            "correct_answer": "⌊log₂(n)⌋",
+            "explanation": "The minimum height is achieved in a perfectly balanced tree.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-17",
             "category": "Performance and Optimization",
-            "question": "What is the worst-case height of a BST?",
+            "text": "What is the worst-case height of a BST?",
             "options": ["log n", "n/2", "n", "n-1"],
-            "correct_answer": 3,
-            "explanation": "In a completely skewed tree, each node has only one child, making height n-1."
+            "correct_answer": "n-1",
+            "explanation": "In a completely skewed tree, each node has only one child, making height n-1.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-18",
             "category": "Performance and Optimization",
-            "question": "What causes a BST to become skewed?",
+            "text": "What causes a BST to become skewed?",
             "options": [
                 "Random insertions",
                 "Sorted insertions",
                 "Balanced insertions",
                 "Alternate insertions"
             ],
-            "correct_answer": 1,
-            "explanation": "Inserting sorted data creates a linear structure, effectively becoming a linked list."
+            "correct_answer": "Sorted insertions",
+            "explanation": "Inserting sorted data creates a linear structure, effectively becoming a linked list.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-19",
             "category": "Performance and Optimization",
-            "question": "Which operation is most affected by tree skewing?",
+            "text": "Which operation is most affected by tree skewing?",
             "options": ["Insertion", "Deletion", "Search", "All of these"],
-            "correct_answer": 3,
-            "explanation": "All operations degrade to O(n) in a skewed tree, losing the log n advantage."
+            "correct_answer": "Search",
+            "explanation": "All operations degrade to O(n) in a skewed tree, losing the log n advantage.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-20",
             "category": "Performance and Optimization",
-            "question": "What technique prevents tree skewing?",
+            "text": "What technique prevents tree skewing?",
             "options": [
                 "Self-balancing",
                 "Perfect balancing",
                 "Complete balancing",
                 "Manual restructuring"
             ],
-            "correct_answer": 0,
-            "explanation": "Self-balancing techniques like AVL or Red-Black trees maintain balance automatically."
+            "correct_answer": "Self-balancing",
+            "explanation": "Self-balancing techniques like AVL or Red-Black trees maintain balance automatically.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-21",
             "category": "Advanced Concepts",
-            "question": "What is a threaded binary search tree?",
+            "text": "What is a threaded binary search tree?",
             "options": [
                 "A BST with multiple threads",
                 "A BST with null pointers replaced by useful links",
                 "A BST with parallel processing",
                 "A BST with multiple roots"
             ],
-            "correct_answer": 1,
-            "explanation": "Threaded BSTs use null pointers to link to inorder predecessor/successor."
+            "correct_answer": "A BST with null pointers replaced by useful links",
+            "explanation": "Threaded BSTs use null pointers to link to inorder predecessor/successor.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-22",
             "category": "Advanced Concepts",
-            "question": "What is the advantage of a threaded BST?",
+            "text": "What is the advantage of a threaded BST?",
             "options": [
                 "Faster insertion",
                 "Faster deletion",
                 "Efficient traversal without recursion",
                 "Reduced space complexity"
             ],
-            "correct_answer": 2,
-            "explanation": "Threaded BSTs allow efficient traversal without using a stack or recursion."
+            "correct_answer": "Efficient traversal without recursion",
+            "explanation": "Threaded BSTs allow efficient traversal without using a stack or recursion.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-23",
             "category": "Advanced Concepts",
-            "question": "What is a complete binary search tree?",
+            "text": "What is a complete binary search tree?",
             "options": [
                 "All levels are full",
                 "All levels except last are full, last level filled left to right",
                 "All nodes have two children",
                 "All leaf nodes are at same level"
             ],
-            "correct_answer": 1,
-            "explanation": "A complete BST has all levels filled except possibly the last, which is filled from left to right."
+            "correct_answer": "All levels except last are full, last level filled left to right",
+            "explanation": "A complete BST has all levels filled except possibly the last, which is filled from left to right.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-24",
-            "category": "Advanced Concepts",
-            "question": "What is the maximum number of nodes in a BST of height h?",
+            "category": "Performance and Optimization",
+            "text": "What is the maximum number of nodes in a BST of height h?",
             "options": ["2^h", "2^(h+1)", "2^h - 1", "2^(h+1) - 1"],
-            "correct_answer": 3,
-            "explanation": "A perfect BST of height h has 2^(h+1) - 1 nodes."
+            "correct_answer": "2^(h+1) - 1",
+            "explanation": "A perfect BST of height h has 2^(h+1) - 1 nodes.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-25",
-            "category": "Advanced Concepts",
-            "question": "What is the minimum number of nodes in a BST of height h?",
+            "category": "Performance and Optimization",
+            "text": "What is the minimum number of nodes in a BST of height h?",
             "options": ["h", "h+1", "2h", "2h+1"],
-            "correct_answer": 1,
-            "explanation": "A minimal BST of height h has h+1 nodes (one per level)."
+            "correct_answer": "h+1",
+            "explanation": "A minimal BST of height h has h+1 nodes (one per level).",
+            "difficulty": "medium"
         },
         {
             "id": "bst-26",
-            "category": "Implementation Details",
-            "question": "What is the typical node structure in a BST?",
+            "category": "Basic Concepts and Properties",
+            "text": "What is the typical node structure in a BST?",
             "options": [
                 "Value only",
                 "Value and one pointer",
                 "Value and two pointers",
                 "Value and three pointers"
             ],
-            "correct_answer": 2,
-            "explanation": "A BST node typically contains a value and left/right child pointers."
+            "correct_answer": "Value and two pointers",
+            "explanation": "A BST node typically contains a value and left/right child pointers.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-27",
             "category": "Implementation Details",
-            "question": "How is parent access typically implemented?",
+            "text": "How is parent access typically implemented?",
             "options": [
                 "Additional parent pointer",
                 "Stack during traversal",
                 "Global parent variable",
                 "Hash table lookup"
             ],
-            "correct_answer": 0,
-            "explanation": "Parent access is usually implemented with an additional pointer in the node structure."
+            "correct_answer": "Additional parent pointer",
+            "explanation": "Parent access is usually implemented with an additional pointer in the node structure.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-28",
-            "category": "Implementation Details",
-            "question": "What additional field might a self-balancing BST node have?",
+            "category": "Advanced Concepts",
+            "text": "What additional field might a self-balancing BST node have?",
             "options": [
                 "Color (Red/Black)",
                 "Count",
                 "Height",
                 "Any of these"
             ],
-            "correct_answer": 3,
-            "explanation": "Self-balancing BSTs might store color (Red-Black), height (AVL), or other balance information."
+            "correct_answer": "Any of these",
+            "explanation": "Self-balancing BSTs might store color (Red-Black), height (AVL), or other balance information.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-29",
             "category": "Implementation Details",
-            "question": "How is tree equality typically checked?",
+            "text": "How is tree equality typically checked?",
             "options": [
                 "Compare node counts",
                 "Compare root values",
                 "Recursive structure comparison",
                 "Compare heights"
             ],
-            "correct_answer": 2,
-            "explanation": "Tree equality requires recursive comparison of structure and values."
+            "correct_answer": "Recursive structure comparison",
+            "explanation": "Tree equality requires recursive comparison of structure and values.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-30",
             "category": "Implementation Details",
-            "question": "What is the most memory-efficient way to store a perfect BST?",
+            "text": "What is the most memory-efficient way to store a perfect BST?",
             "options": [
                 "Linked structure",
                 "Array representation",
                 "Hash table",
                 "Threaded structure"
             ],
-            "correct_answer": 1,
-            "explanation": "Array representation is most memory-efficient for complete/perfect BSTs."
+            "correct_answer": "Array representation",
+            "explanation": "Array representation is most memory-efficient for complete/perfect BSTs.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-31",
-            "category": "Applications and Use Cases",
-            "question": "Which application best suits a BST?",
+            "category": "Comparison and Applications",
+            "text": "Which application best suits a BST?",
             "options": [
                 "First-in-first-out queue",
                 "Dictionary implementation",
                 "Stack implementation",
                 "Circular buffer"
             ],
-            "correct_answer": 1,
-            "explanation": "BSTs are ideal for dictionary implementations due to efficient search/insert/delete."
+            "correct_answer": "Dictionary implementation",
+            "explanation": "BSTs are ideal for dictionary implementations due to efficient search/insert/delete.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-32",
-            "category": "Applications and Use Cases",
-            "question": "When is a BST preferred over a hash table?",
+            "category": "Comparison and Applications",
+            "text": "When is a BST preferred over a hash table?",
             "options": [
                 "Need for ordered data",
                 "Constant time access",
                 "Minimal memory usage",
                 "Random access patterns"
             ],
-            "correct_answer": 0,
-            "explanation": "BSTs maintain order and allow range queries, unlike hash tables."
+            "correct_answer": "Need for ordered data",
+            "explanation": "BSTs maintain order and allow range queries, unlike hash tables.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-33",
-            "category": "Applications and Use Cases",
-            "question": "What operation is uniquely efficient in BSTs?",
+            "category": "Performance and Optimization",
+            "text": "What operation is uniquely efficient in BSTs?",
             "options": [
                 "Finding minimum/maximum",
                 "Random access",
                 "Range queries",
                 "Constant time insertion"
             ],
-            "correct_answer": 2,
-            "explanation": "BSTs excel at range queries due to their ordered nature."
+            "correct_answer": "Finding minimum/maximum",
+            "explanation": "BSTs excel at range queries due to their ordered nature.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-34",
-            "category": "Applications and Use Cases",
-            "question": "Which scenario might not benefit from a BST?",
+            "category": "Comparison and Applications",
+            "text": "Which scenario might not benefit from a BST?",
             "options": [
                 "Sorted data storage",
                 "Frequent range queries",
                 "Random access patterns",
                 "Ordered traversal needs"
             ],
-            "correct_answer": 2,
-            "explanation": "Random access patterns might be better served by arrays or hash tables."
+            "correct_answer": "Random access patterns",
+            "explanation": "Random access patterns might be better served by arrays or hash tables.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-35",
-            "category": "Applications and Use Cases",
-            "question": "What makes BSTs good for database indexing?",
+            "category": "Comparison and Applications",
+            "text": "What makes BSTs good for database indexing?",
             "options": [
                 "Constant time operations",
                 "Order preservation",
                 "Minimal space usage",
                 "Simple implementation"
             ],
-            "correct_answer": 1,
-            "explanation": "BSTs' order preservation enables efficient range queries and ordered access."
+            "correct_answer": "Order preservation",
+            "explanation": "BSTs' order preservation enables efficient range queries and ordered access.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-36",
-            "category": "Error Handling and Edge Cases",
-            "question": "What happens when deleting from an empty tree?",
+            "category": "Implementation Details",
+            "text": "What happens when deleting from an empty tree?",
             "options": [
                 "Runtime error",
                 "Tree becomes null",
                 "Operation is ignored",
                 "Implementation dependent"
             ],
-            "correct_answer": 3,
-            "explanation": "Handling empty tree deletion is implementation-specific, but should be handled gracefully."
+            "correct_answer": "Implementation dependent",
+            "explanation": "Handling empty tree deletion is implementation-specific, but should be handled gracefully.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-37",
-            "category": "Error Handling and Edge Cases",
-            "question": "How to handle duplicate keys?",
+            "category": "Implementation Details",
+            "text": "How to handle duplicate keys?",
             "options": [
                 "Always reject",
                 "Always replace",
                 "Store in list at node",
                 "Implementation choice"
             ],
-            "correct_answer": 3,
-            "explanation": "Duplicate handling varies by implementation needs."
+            "correct_answer": "Implementation choice",
+            "explanation": "Duplicate handling varies by implementation needs.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-38",
-            "category": "Error Handling and Edge Cases",
-            "question": "What happens if root is deleted?",
+            "category": "Insertion and Deletion",
+            "text": "What happens if root is deleted?",
             "options": [
                 "Tree becomes empty",
                 "Left child becomes root",
                 "Right child becomes root",
                 "Successor becomes root"
             ],
-            "correct_answer": 3,
-            "explanation": "When deleting root, its successor maintains BST properties."
+            "correct_answer": "Successor becomes root",
+            "explanation": "When deleting root, its successor maintains BST properties.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-39",
-            "category": "Error Handling and Edge Cases",
-            "question": "How to handle insertion into full memory?",
+            "category": "Implementation Details",
+            "text": "How to handle insertion into full memory?",
             "options": [
                 "Ignore insertion",
                 "Remove oldest element",
                 "Throw exception",
                 "Implementation dependent"
             ],
-            "correct_answer": 3,
-            "explanation": "Memory full handling depends on system requirements."
+            "correct_answer": "Implementation dependent",
+            "explanation": "Memory full handling depends on system requirements.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-40",
-            "category": "Error Handling and Edge Cases",
-            "question": "What happens during key type mismatch?",
+            "category": "Implementation Details",
+            "text": "What happens during key type mismatch?",
             "options": [
                 "Automatic conversion",
                 "Runtime error",
                 "Ignore operation",
                 "Implementation dependent"
             ],
-            "correct_answer": 1,
-            "explanation": "Type mismatches typically cause runtime errors unless handled specifically."
+            "correct_answer": "Implementation dependent",
+            "explanation": "Type mismatches typically cause runtime errors unless handled specifically.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-41",
-            "category": "Comparison with Other Data Structures",
-            "question": "BST vs Array for searching: when is BST better?",
+            "category": "Comparison and Applications",
+            "text": "BST vs Array for searching: when is BST better?",
             "options": [
                 "Always",
                 "Never",
                 "For large datasets",
                 "For small datasets"
             ],
-            "correct_answer": 2,
-            "explanation": "BSTs are better for large datasets due to O(log n) search time."
+            "correct_answer": "For large datasets",
+            "explanation": "BSTs are better for large datasets due to O(log n) search time.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-42",
-            "category": "Comparison with Other Data Structures",
-            "question": "BST vs Hash Table: which maintains order?",
+            "category": "Comparison and Applications",
+            "text": "BST vs Hash Table: which maintains order?",
             "options": [
                 "Hash Table",
                 "BST",
                 "Both",
                 "Neither"
             ],
-            "correct_answer": 1,
-            "explanation": "BSTs maintain order, hash tables do not."
+            "correct_answer": "BST",
+            "explanation": "BSTs maintain order, hash tables do not.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-43",
-            "category": "Comparison with Other Data Structures",
-            "question": "When is AVL tree preferred over basic BST?",
+            "category": "Advanced Concepts",
+            "text": "When is AVL tree preferred over basic BST?",
             "options": [
                 "Small datasets",
                 "Frequent updates",
                 "Static data",
                 "Sequential access"
             ],
-            "correct_answer": 1,
-            "explanation": "AVL trees are preferred when frequent updates could unbalance the tree."
+            "correct_answer": "Frequent updates",
+            "explanation": "AVL trees are preferred when frequent updates could unbalance the tree.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-44",
-            "category": "Comparison with Other Data Structures",
-            "question": "BST vs Linked List: which is better for sorting?",
+            "category": "Comparison and Applications",
+            "text": "BST vs Linked List: which is better for sorting?",
             "options": [
                 "BST",
                 "Linked List",
                 "Equal performance",
                 "Depends on data"
             ],
-            "correct_answer": 0,
-            "explanation": "BSTs provide inherent sorting through inorder traversal."
+            "correct_answer": "BST",
+            "explanation": "BSTs provide inherent sorting through inorder traversal.",
+            "difficulty": "easy"
         },
         {
             "id": "bst-45",
-            "category": "Comparison with Other Data Structures",
-            "question": "What advantage does Red-Black tree have over BST?",
+            "category": "Advanced Concepts",
+            "text": "What advantage does Red-Black tree have over BST?",
             "options": [
                 "Faster search",
                 "Less memory",
                 "Guaranteed balance",
                 "Simpler implementation"
             ],
-            "correct_answer": 2,
-            "explanation": "Red-Black trees guarantee O(log n) operations through balancing."
+            "correct_answer": "Guaranteed balance",
+            "explanation": "Red-Black trees guarantee O(log n) operations through balancing.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-46",
-            "category": "Theoretical Concepts",
-            "question": "What is the optimal BST problem?",
+            "category": "Advanced Concepts",
+            "text": "What is the optimal BST problem?",
             "options": [
                 "Minimizing height",
                 "Minimizing search cost",
                 "Maximizing balance",
                 "Maximizing throughput"
             ],
-            "correct_answer": 1,
-            "explanation": "Optimal BST minimizes expected search cost given access probabilities."
+            "correct_answer": "Minimizing search cost",
+            "explanation": "Optimal BST minimizes expected search cost given access probabilities.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-47",
-            "category": "Theoretical Concepts",
-            "question": "What is a weight-balanced tree?",
+            "category": "Advanced Concepts",
+            "text": "What is a weight-balanced tree?",
             "options": [
                 "All nodes same weight",
                 "Subtree sizes differ by at most one",
                 "Balanced by node values",
                 "Balanced by node count"
             ],
-            "correct_answer": 3,
-            "explanation": "Weight-balanced trees balance by number of nodes in subtrees."
+            "correct_answer": "Subtree sizes differ by at most one",
+            "explanation": "Weight-balanced trees balance by number of nodes in subtrees.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-48",
-            "category": "Theoretical Concepts",
-            "question": "What is the rotation operation used for?",
+            "category": "Advanced Concepts",
+            "text": "What is the rotation operation used for?",
             "options": [
                 "Changing tree structure",
                 "Maintaining balance",
                 "Optimizing search",
                 "All of these"
             ],
-            "correct_answer": 3,
-            "explanation": "Rotations change structure to maintain balance and optimize operations."
+            "correct_answer": "All of these",
+            "explanation": "Rotations change structure to maintain balance and optimize operations.",
+            "difficulty": "medium"
         },
         {
             "id": "bst-49",
-            "category": "Theoretical Concepts",
-            "question": "What is the time complexity of building optimal BST?",
+            "category": "Performance and Optimization",
+            "text": "What is the time complexity of building optimal BST?",
             "options": ["O(n)", "O(n log n)", "O(n²)", "O(n³)"],
-            "correct_answer": 2,
-            "explanation": "Building an optimal BST with dynamic programming takes O(n²) time."
+            "correct_answer": "O(n²)",
+            "explanation": "Building an optimal BST with dynamic programming takes O(n²) time.",
+            "difficulty": "hard"
         },
         {
             "id": "bst-50",
-            "category": "Theoretical Concepts",
-            "question": "What is the relationship between BST and sorting?",
+            "category": "Basic Concepts and Properties",
+            "text": "What is the relationship between BST and sorting?",
             "options": [
                 "BST can sort in O(n)",
                 "Inorder traversal sorts",
                 "Preorder traversal sorts",
                 "No relationship"
             ],
-            "correct_answer": 1,
-            "explanation": "Inorder traversal of a BST produces elements in sorted order."
+            "correct_answer": "Inorder traversal sorts",
+            "explanation": "Inorder traversal of a BST produces elements in sorted order.",
+            "difficulty": "easy"
         }
     ]
 } 
