@@ -5,6 +5,7 @@ import os
 class MCPService:
     def __init__(self):
         self.question_bank = {}
+        self.topic_info = {}
         self.current_questions = {}
         self._load_questions()
 
@@ -18,8 +19,20 @@ class MCPService:
                     topic_data = json.load(f)
                     topic = topic_data['topic']
                     self.question_bank[topic] = topic_data['questions']
+                    # Store topic info separately
+                    self.topic_info[topic] = {
+                        'name': topic_data['name'],
+                        'description': topic_data['description']
+                    }
+
+    def get_topic_info(self, topic):
+        """Get information about a specific topic."""
+        if topic not in self.topic_info:
+            return None
+        return self.topic_info[topic]
 
     def generate_question(self, topic):
+        """Generate a random question for the given topic."""
         if topic not in self.question_bank:
             return None
         
@@ -37,8 +50,9 @@ class MCPService:
         }
 
     def validate_answer(self, topic, question_id, answer):
+        """Validate an answer for a specific question."""
         if topic not in self.question_bank:
-            return {"correct": False, "message": "Invalid question"}
+            return {"correct": False, "message": "Invalid topic"}
 
         # Find the question with the matching ID
         matching_questions = [q for q in self.question_bank[topic] if q["id"] == question_id]

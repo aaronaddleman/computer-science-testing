@@ -1,0 +1,36 @@
+{
+    "topic": "graph-algorithms",
+    "name": "Graph Algorithms",
+    "description": "Questions about graph theory, traversal algorithms, shortest paths, and minimum spanning trees.",
+    "questions": [
+        {
+            "id": "graph-1",
+            "category": "Basic Concepts",
+            "question": "What is the time complexity of BFS in a graph with V vertices and E edges?",
+            "options": ["O(V)", "O(E)", "O(V + E)", "O(V * E)"],
+            "correct_answer": 2,
+            "explanation": "BFS visits each vertex once (O(V)) and explores each edge once (O(E)), resulting in O(V + E)."
+        },
+        {
+            "id": "graph-2",
+            "category": "Shortest Path",
+            "question": "Which algorithm finds the shortest path in a weighted graph with negative edges?",
+            "options": ["Dijkstra's", "Bellman-Ford", "Floyd-Warshall", "A*"],
+            "correct_answer": 1,
+            "explanation": "Bellman-Ford can handle negative edge weights, while Dijkstra's assumes all weights are positive."
+        },
+        {
+            "id": "graph-3",
+            "category": "Minimum Spanning Tree",
+            "question": "What is the primary difference between Prim's and Kruskal's algorithms?",
+            "options": [
+                "Time complexity",
+                "Space complexity",
+                "Starting approach (vertex vs edge)",
+                "Final result"
+            ],
+            "correct_answer": 2,
+            "explanation": "Prim's starts with a vertex and grows the tree, while Kruskal's starts with edges sorted by weight."
+        }
+    ]
+} 
