@@ -53,6 +53,10 @@ class TestApp(unittest.TestCase):
 
     def test_test_pages(self):
         """Test if test pages for all topics load with valid questions"""
+        def html_encode(text):
+            """Helper function to encode text similar to HTML"""
+            return text.replace("'", "&#39;").replace('"', "&quot;")
+            
         for topic in self.topics.keys():
             response = self.app.get(f'/algo/{topic}/test')
             self.assertEqual(response.status_code, 200, f"Test page for {topic} failed to load")
@@ -62,28 +66,55 @@ class TestApp(unittest.TestCase):
             found_valid_question = False
             
             for question in self.topics[topic]:
-                if question['question'] in response_text:
-                    # Found a valid question, verify its options are present
+                # Check for question text and difficulty
+                question_text_html = html_encode(question['text'])
+                if question_text_html in response_text:
+                    # Found a valid question, verify its options and difficulty are present
                     for option in question['options']:
-                        self.assertIn(option, response_text)
+                        # Handle HTML-encoded characters
+                        option_html = html_encode(option)
+                        self.assertIn(option_html, response_text,
+                            f"Option '{option}' not found in HTML for question {question['id']}")
+                    
+                    difficulty = question.get('difficulty', 'medium')  # Default to medium if not specified
+                    self.assertIn(difficulty.upper(), response_text,  # Check for difficulty level in uppercase
+                        f"Difficulty '{difficulty}' not found in HTML for question {question['id']}")
                     found_valid_question = True
                     break
             
-            self.assertTrue(found_valid_question, f"No valid question found in response for {topic}")
+            self.assertTrue(found_valid_question, 
+                f"No valid question found in response for {topic}. Response text: {response_text[:200]}...")
 
     def test_answer_validation_all_topics(self):
-        """Test answer validation for each topic"""
+        """Test answer validation for all questions in each topic"""
+        required_fields = ['id', 'category', 'text', 'options', 'correct_answer', 'explanation', 'difficulty']
+        valid_difficulties = ['easy', 'medium', 'hard']
+        
         for topic, questions in self.topics.items():
-            # Test 3 random questions from each topic
-            test_questions = random.sample(questions, min(3, len(questions)))
-            
-            for question in test_questions:
+            # Test every question in the topic
+            for question in questions:
+                # Validate question structure
+                for field in required_fields:
+                    self.assertIn(field, question, 
+                        f"Question {question.get('id', 'unknown')} in {topic} missing required field: {field}")
+                
+                # Validate difficulty value
+                self.assertIn(question['difficulty'], valid_difficulties,
+                    f"Question {question['id']} in {topic} has invalid difficulty: {question['difficulty']}")
+                
+                # Validate options
+                self.assertGreater(len(question['options']), 1,
+                    f"Question {question['id']} in {topic} has too few options")
+                self.assertIn(question['correct_answer'], question['options'],
+                    f"Question {question['id']} in {topic} correct answer not in options")
+                
                 # Test correct answer
                 response = self.app.post('/api/validate-answer',
                     json={
                         'topic': topic,
                         'question_id': question['id'],
-                        'answer': question['correct_answer']
+                        'answer': question['correct_answer'],
+                        'response_time': 1.0
                     })
                 
                 self.assertEqual(response.status_code, 200, 
@@ -91,23 +122,33 @@ class TestApp(unittest.TestCase):
                 data = json.loads(response.data)
                 self.assertTrue(data['correct'], 
                     f"Question {question['id']} in {topic} failed with correct answer")
-                self.assertEqual(data['explanation'], question['explanation'],
-                    f"Explanation mismatch for {topic}, question {question['id']}")
+                self.assertIn('message', data,
+                    f"Message missing for {topic}, question {question['id']}")
+                self.assertEqual(data['message'], question['explanation'],
+                    f"Explanation mismatch for correct answer in {topic}, question {question['id']}")
+                self.assertEqual(data['difficulty'], question['difficulty'],
+                    f"Difficulty mismatch in response for {topic}, question {question['id']}")
 
-                # Test incorrect answer
-                wrong_answer = (question['correct_answer'] + 1) % len(question['options'])
-                response = self.app.post('/api/validate-answer',
-                    json={
-                        'topic': topic,
-                        'question_id': question['id'],
-                        'answer': wrong_answer
-                    })
-                
-                self.assertEqual(response.status_code, 200,
-                    f"Failed to validate incorrect answer for {topic}, question {question['id']}")
-                data = json.loads(response.data)
-                self.assertFalse(data['correct'],
-                    f"Question {question['id']} in {topic} incorrectly marked wrong answer as correct")
+                # Test all incorrect answers
+                wrong_options = [opt for opt in question['options'] if opt != question['correct_answer']]
+                for wrong_answer in wrong_options:
+                    response = self.app.post('/api/validate-answer',
+                        json={
+                            'topic': topic,
+                            'question_id': question['id'],
+                            'answer': wrong_answer,
+                            'response_time': 1.0
+                        })
+                    
+                    self.assertEqual(response.status_code, 200,
+                        f"Failed to validate incorrect answer for {topic}, question {question['id']}")
+                    data = json.loads(response.data)
+                    self.assertFalse(data['correct'],
+                        f"Question {question['id']} in {topic} incorrectly marked wrong answer as correct")
+                    self.assertIn('message', data,
+                        f"Message missing for incorrect answer in {topic}, question {question['id']}")
+                    self.assertEqual(data['difficulty'], question['difficulty'],
+                        f"Difficulty mismatch in response for {topic}, question {question['id']}")
 
     def test_invalid_questions(self):
         """Test validation with invalid questions for each topic"""
@@ -116,7 +157,8 @@ class TestApp(unittest.TestCase):
                 json={
                     'topic': topic,
                     'question_id': 'invalid-id',
-                    'answer': 0
+                    'answer': 'invalid',
+                    'response_time': 1.0  # Add mock response time
                 })
             
             self.assertEqual(response.status_code, 200,

@@ -6,41 +6,44 @@
         {
             "id": "dp-1",
             "category": "Basic Concepts",
-            "question": "What are the two key properties required for a problem to be solved using dynamic programming?",
+            "text": "What are the two key properties required for a problem to be solved using dynamic programming?",
             "options": [
                 "Recursion and iteration",
                 "Optimal substructure and overlapping subproblems",
                 "Memoization and tabulation",
                 "Greedy choice and backtracking"
             ],
-            "correct_answer": 1,
-            "explanation": "DP requires optimal substructure (optimal solution contains optimal subsolutions) and overlapping subproblems (same subproblems are encountered multiple times)."
+            "correct_answer": "Optimal substructure and overlapping subproblems",
+            "explanation": "DP requires optimal substructure (optimal solution contains optimal subsolutions) and overlapping subproblems (same subproblems are encountered multiple times).",
+            "difficulty": "medium"
         },
         {
             "id": "dp-2",
             "category": "Implementation",
-            "question": "What is the primary difference between memoization and tabulation?",
+            "text": "What is the primary difference between memoization and tabulation?",
             "options": [
                 "Time complexity",
                 "Space complexity",
                 "Top-down vs Bottom-up approach",
                 "Recursive vs Iterative"
             ],
-            "correct_answer": 2,
-            "explanation": "Memoization is top-down (recursive with caching), while tabulation is bottom-up (iterative building of solution)."
+            "correct_answer": "Top-down vs Bottom-up approach",
+            "explanation": "Memoization is top-down (recursive with caching), while tabulation is bottom-up (iterative building of solution).",
+            "difficulty": "medium"
         },
         {
             "id": "dp-3",
             "category": "Applications",
-            "question": "Which problem is NOT typically solved using dynamic programming?",
+            "text": "Which problem is NOT typically solved using dynamic programming?",
             "options": [
                 "Longest Common Subsequence",
                 "Finding shortest path in unweighted graph",
                 "0/1 Knapsack",
                 "Matrix Chain Multiplication"
             ],
-            "correct_answer": 1,
-            "explanation": "Finding shortest path in unweighted graph is typically solved using BFS, not DP, as it doesn't have overlapping subproblems."
+            "correct_answer": "Finding shortest path in unweighted graph",
+            "explanation": "Finding shortest path in unweighted graph is typically solved using BFS, not DP, as it doesn't have overlapping subproblems.",
+            "difficulty": "hard"
         }
     ]
 } 

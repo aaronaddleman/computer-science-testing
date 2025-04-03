@@ -6,26 +6,29 @@
         {
             "id": "sort-1",
             "category": "Basic Concepts",
-            "question": "What is the best-case time complexity of Bubble Sort?",
+            "text": "What is the best-case time complexity of Bubble Sort?",
             "options": ["O(n)", "O(n log n)", "O(n²)", "O(1)"],
-            "correct_answer": 0,
-            "explanation": "Best case is O(n) when array is already sorted, as it only needs one pass to confirm."
+            "correct_answer": "O(n)",
+            "explanation": "Best case is O(n) when array is already sorted, as it only needs one pass to confirm.",
+            "difficulty": "medium"
         },
         {
             "id": "sort-2",
             "category": "Quick Sort",
-            "question": "What is the average time complexity of Quick Sort?",
+            "text": "What is the average time complexity of Quick Sort?",
             "options": ["O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
-            "correct_answer": 1,
-            "explanation": "Quick Sort averages O(n log n) due to its divide-and-conquer strategy with efficient partitioning."
+            "correct_answer": "O(n log n)",
+            "explanation": "Quick Sort averages O(n log n) due to its divide-and-conquer strategy with efficient partitioning.",
+            "difficulty": "medium"
         },
         {
             "id": "sort-3",
             "category": "Merge Sort",
-            "question": "Which sorting algorithm is guaranteed to have O(n log n) complexity in all cases?",
+            "text": "Which sorting algorithm is guaranteed to have O(n log n) complexity in all cases?",
             "options": ["Quick Sort", "Merge Sort", "Heap Sort", "Both B and C"],
-            "correct_answer": 3,
-            "explanation": "Both Merge Sort and Heap Sort guarantee O(n log n) complexity in all cases."
+            "correct_answer": "Both B and C",
+            "explanation": "Both Merge Sort and Heap Sort guarantee O(n log n) complexity in all cases.",
+            "difficulty": "hard"
         }
     ]
 } 
