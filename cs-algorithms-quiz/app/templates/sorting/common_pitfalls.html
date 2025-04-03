@@ -1,0 +1,79 @@
+<div class="study-section">
+    <h3>Common Pitfalls in Sorting Algorithms</h3>
+    
+    <h4>1. Choosing the Wrong Algorithm</h4>
+    <ul>
+        <li><strong>Problem:</strong> Using bubble sort for large datasets</li>
+        <li><strong>Solution:</strong> Consider the data size and characteristics when choosing a sorting algorithm:
+            <ul>
+                <li>Use QuickSort or MergeSort for large datasets</li>
+                <li>Use Insertion Sort for small datasets or nearly sorted data</li>
+                <li>Use Counting Sort or Radix Sort for integers with known range</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>2. Stability Issues</h4>
+    <ul>
+        <li><strong>Problem:</strong> Using unstable sorting algorithms when order preservation is important</li>
+        <li><strong>Solution:</strong> Use stable sorting algorithms (like Merge Sort) when you need to preserve the relative order of equal elements</li>
+    </ul>
+
+    <h4>3. Space Complexity Oversight</h4>
+    <ul>
+        <li><strong>Problem:</strong> Not considering memory constraints</li>
+        <li><strong>Solution:</strong> Choose algorithms based on available memory:
+            <ul>
+                <li>Use in-place sorting algorithms (like QuickSort) when memory is limited</li>
+                <li>Be cautious with recursive implementations that can cause stack overflow</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>4. Edge Cases</h4>
+    <ul>
+        <li><strong>Problem:</strong> Not handling special cases properly</li>
+        <li><strong>Solution:</strong> Always consider:
+            <ul>
+                <li>Empty arrays</li>
+                <li>Single-element arrays</li>
+                <li>Arrays with duplicate elements</li>
+                <li>Already sorted arrays</li>
+                <li>Reverse sorted arrays</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>5. Pivot Selection in QuickSort</h4>
+    <ul>
+        <li><strong>Problem:</strong> Poor pivot selection leading to worst-case performance</li>
+        <li><strong>Solution:</strong> Use better pivot selection strategies:
+            <ul>
+                <li>Choose median of three elements</li>
+                <li>Use random pivot selection</li>
+                <li>Consider the data distribution</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>6. Comparison Function Issues</h4>
+    <ul>
+        <li><strong>Problem:</strong> Incorrect comparison function implementation</li>
+        <li><strong>Solution:</strong>
+            <ul>
+                <li>Ensure comparison function is transitive</li>
+                <li>Handle edge cases in custom comparators</li>
+                <li>Test with various data types and values</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Best Practices</h4>
+    <ul>
+        <li>Always validate input data before sorting</li>
+        <li>Consider using built-in sorting functions for standard cases</li>
+        <li>Test with various data sizes and patterns</li>
+        <li>Monitor performance in production environments</li>
+        <li>Document any assumptions about the input data</li>
+    </ul>
+</div> 

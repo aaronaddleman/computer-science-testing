@@ -1,33 +1,63 @@
 {
     "topic": "sorting-algorithms",
     "name": "Sorting Algorithms",
-    "description": "Questions about common sorting algorithms, their properties, complexities, and use cases.",
+    "description": "Master the art of sorting algorithms through understanding their principles, implementations, and real-world applications.",
+    "content_files": {
+        "overview": "sorting/overview.html",
+        "key_concepts": "sorting/key_concepts.html",
+        "examples": "sorting/examples.html",
+        "complexity": "sorting/complexity.html",
+        "common_pitfalls": "sorting/common_pitfalls.html"
+    },
+    "images": [
+        {
+            "filename": "bubble_sort_steps.svg",
+            "caption": "Bubble Sort: Step-by-step visualization showing how elements bubble up to their correct positions"
+        },
+        {
+            "filename": "quick_sort_steps.svg",
+            "caption": "Quick Sort: Detailed visualization of the partitioning process and recursive tree structure"
+        },
+        {
+            "filename": "merge_sort_steps.svg",
+            "caption": "Merge Sort: Complete visualization of the divide-and-conquer process with merge tree"
+        }
+    ],
     "questions": [
         {
             "id": "sort-1",
             "category": "Basic Concepts",
-            "text": "What is the best-case time complexity of Bubble Sort?",
+            "question": "What is the best-case time complexity of Bubble Sort?",
             "options": ["O(n)", "O(n log n)", "O(n²)", "O(1)"],
-            "correct_answer": "O(n)",
+            "correct_answer": 0,
             "explanation": "Best case is O(n) when array is already sorted, as it only needs one pass to confirm.",
             "difficulty": "medium"
         },
         {
             "id": "sort-2",
             "category": "Quick Sort",
-            "text": "What is the average time complexity of Quick Sort?",
+            "question": "What is the average time complexity of Quick Sort?",
             "options": ["O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
-            "correct_answer": "O(n log n)",
+            "correct_answer": 1,
             "explanation": "Quick Sort averages O(n log n) due to its divide-and-conquer strategy with efficient partitioning.",
             "difficulty": "medium"
         },
         {
             "id": "sort-3",
-            "category": "Merge Sort",
-            "text": "Which sorting algorithm is guaranteed to have O(n log n) complexity in all cases?",
-            "options": ["Quick Sort", "Merge Sort", "Heap Sort", "Both B and C"],
-            "correct_answer": "Both B and C",
-            "explanation": "Both Merge Sort and Heap Sort guarantee O(n log n) complexity in all cases.",
+            "category": "Algorithm Selection",
+            "question": "Which sorting algorithm should you choose for sorting a large dataset with limited memory?",
+            "options": ["Merge Sort", "Quick Sort", "Heap Sort", "Bubble Sort"],
+            "correct_answer": 2,
+            "explanation": "Heap Sort is ideal for large datasets with limited memory as it provides O(n log n) time complexity with O(1) extra space.",
+            "difficulty": "hard"
+        },
+        {
+            "id": "sort-4",
+            "category": "Stability",
+            "question": "When sorting student records by grade, maintaining original order for equal grades is important. Which algorithm should you use?",
+            "options": ["Quick Sort", "Merge Sort", "Heap Sort", "Shell Sort"],
+            "correct_answer": 1,
+            "explanation": "Merge Sort is stable, maintaining relative order of equal elements, making it perfect for this scenario.",
             "difficulty": "hard"
         }
     ]

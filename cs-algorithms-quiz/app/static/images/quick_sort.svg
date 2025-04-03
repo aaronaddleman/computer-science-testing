@@ -1,0 +1,54 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="#f8f9fa"/>
+    
+    <!-- Title -->
+    <text x="200" y="30" text-anchor="middle" font-family="Arial" font-size="16" fill="#2c3e50">Quick Sort</text>
+    
+    <!-- Original array -->
+    <g transform="translate(50, 80)">
+        <text x="0" y="-10" font-family="Arial" font-size="12" fill="#7f8c8d">Original Array</text>
+        <rect x="0" y="0" width="40" height="40" fill="#e74c3c" stroke="#c0392b"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">64</text>
+        
+        <rect x="60" y="0" width="40" height="40" fill="#3498db" stroke="#2980b9"/>
+        <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">34</text>
+        
+        <rect x="120" y="0" width="40" height="40" fill="#2ecc71" stroke="#27ae60"/>
+        <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">25</text>
+        
+        <rect x="180" y="0" width="40" height="40" fill="#f1c40f" stroke="#f39c12"/>
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">12</text>
+        
+        <rect x="240" y="0" width="40" height="40" fill="#9b59b6" stroke="#8e44ad"/>
+        <text x="260" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">22</text>
+    </g>
+    
+    <!-- Partitioned array -->
+    <g transform="translate(50, 180)">
+        <text x="0" y="-10" font-family="Arial" font-size="12" fill="#7f8c8d">After Partition (pivot = 34)</text>
+        
+        <!-- Left partition -->
+        <rect x="0" y="0" width="40" height="40" fill="#2ecc71" stroke="#27ae60"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">25</text>
+        
+        <rect x="60" y="0" width="40" height="40" fill="#f1c40f" stroke="#f39c12"/>
+        <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">12</text>
+        
+        <rect x="120" y="0" width="40" height="40" fill="#9b59b6" stroke="#8e44ad"/>
+        <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">22</text>
+        
+        <!-- Pivot -->
+        <rect x="180" y="0" width="40" height="40" fill="#3498db" stroke="#2980b9"/>
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">34</text>
+        
+        <!-- Right partition -->
+        <rect x="240" y="0" width="40" height="40" fill="#e74c3c" stroke="#c0392b"/>
+        <text x="260" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">64</text>
+    </g>
+    
+    <!-- Description -->
+    <text x="200" y="280" text-anchor="middle" font-family="Arial" font-size="12" fill="#7f8c8d">
+        Partitioning around pivot element (34)
+    </text>
+</svg> 

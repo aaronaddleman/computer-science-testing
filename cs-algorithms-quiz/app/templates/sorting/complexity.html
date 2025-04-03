@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="complexity-section">
+    <h2>Algorithm Complexity Analysis</h2>
+
+    <table class="complexity-table">
+        <thead>
+            <tr>
+                <th>Algorithm</th>
+                <th>Time (Average)</th>
+                <th>Time (Worst)</th>
+                <th>Space</th>
+                <th>Stable</th>
+                <th>Best Use Case</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Bubble Sort</td>
+                <td>O(n²)</td>
+                <td>O(n²)</td>
+                <td>O(1)</td>
+                <td>Yes</td>
+                <td>Small datasets, nearly sorted data</td>
+            </tr>
+            <tr>
+                <td>Quick Sort</td>
+                <td>O(n log n)</td>
+                <td>O(n²)</td>
+                <td>O(log n)</td>
+                <td>No</td>
+                <td>Large datasets, general purpose</td>
+            </tr>
+            <tr>
+                <td>Merge Sort</td>
+                <td>O(n log n)</td>
+                <td>O(n log n)</td>
+                <td>O(n)</td>
+                <td>Yes</td>
+                <td>When stability is required</td>
+            </tr>
+            <tr>
+                <td>Heap Sort</td>
+                <td>O(n log n)</td>
+                <td>O(n log n)</td>
+                <td>O(1)</td>
+                <td>No</td>
+                <td>Limited memory, guaranteed performance</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="complexity-notes">
+        <h3>Important Notes</h3>
+        <ul>
+            <li>Time complexity is measured in terms of comparisons and swaps</li>
+            <li>Space complexity refers to extra space needed beyond input array</li>
+            <li>Stability indicates whether equal elements maintain their relative order</li>
+            <li>Best use case considers practical factors beyond theoretical complexity</li>
+        </ul>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.complexity-table th,
+.complexity-table td {
+    padding: 0.75em;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.complexity-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.complexity-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.complexity-notes {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.complexity-notes ul {
+    margin-top: 0.5em;
+}
+</style>
+{% endblock %}
+{% endblock %} 

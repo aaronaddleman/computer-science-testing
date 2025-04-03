@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="examples-section">
+    <h2>Sorting Algorithm Examples</h2>
+
+    <div class="algorithm-example">
+        <h3>Example 1: Bubble Sort - The Brute Force Approach</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+# Simple implementation of Bubble Sort
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+# Example usage:
+array = [64, 34, 25, 12, 22]
+sorted_array = bubble_sort(array.copy())  # [12, 22, 25, 34, 64]</code></pre>
+        </div>
+        <p class="explanation">Initial thinking: Compare adjacent elements and swap if they're in the wrong order. Simple but inefficient for large datasets.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 2: Quick Sort - The Efficient Approach</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+# Efficient implementation of Quick Sort
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    
+    return quick_sort(left) + middle + quick_sort(right)
+
+# Example usage:
+array = [64, 34, 25, 12, 22]
+sorted_array = quick_sort(array.copy())  # [12, 22, 25, 34, 64]</code></pre>
+        </div>
+        <p class="explanation">Improved thinking: Use divide-and-conquer to partition the array around a pivot, reducing the problem size efficiently.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 3: Merge Sort - The Stable Approach</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+# Stable implementation of Merge Sort
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:  # <= makes it stable
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+# Example usage:
+array = [64, 34, 25, 12, 22]
+sorted_array = merge_sort(array.copy())  # [12, 22, 25, 34, 64]</code></pre>
+        </div>
+        <p class="explanation">Systematic thinking: Break the problem into smaller sorted arrays and merge them while maintaining order.</p>
+    </div>
+</div>
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+<style>
+.code-block {
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin: 1em 0;
+    padding: 1em;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.algorithm-example {
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.explanation {
+    font-style: italic;
+    color: #666;
+    margin-top: 1em;
+}
+</style>
+{% endblock %}
+{% endblock %} 

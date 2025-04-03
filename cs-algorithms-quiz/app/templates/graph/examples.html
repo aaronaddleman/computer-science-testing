@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="examples-section">
+    <h2>Graph Algorithm Examples</h2>
+
+    <div class="algorithm-example">
+        <h3>Example 1: Graph Representation</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+# Adjacency List representation
+class Graph:
+    def __init__(self):
+        self.graph = {}
+    
+    def add_edge(self, u, v, directed=False, weight=1):
+        if u not in self.graph:
+            self.graph[u] = []
+        if v not in self.graph:
+            self.graph[v] = []
+        
+        self.graph[u].append((v, weight))
+        if not directed:
+            self.graph[v].append((u, weight))
+
+# Example usage:
+g = Graph()
+g.add_edge(0, 1, weight=4)
+g.add_edge(0, 2, weight=3)
+g.add_edge(1, 2, weight=1)
+g.add_edge(2, 3, weight=2)</code></pre>
+        </div>
+        <p class="explanation">Graph representation using adjacency list, supporting both directed and undirected weighted edges.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 2: Depth-First Search (DFS)</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    
+    visited.add(start)
+    print(start, end=' ')  # Process current node
+    
+    for neighbor, _ in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+    
+    return visited
+
+# Example usage:
+visited = dfs(g.graph, 0)
+# Output: 0 1 2 3 (vertices in DFS order)</code></pre>
+        </div>
+        <p class="explanation">DFS implementation showing recursive traversal of graph vertices.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 3: Dijkstra's Shortest Path</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+from heapq import heappush, heappop
+
+def dijkstra(graph, start):
+    distances = {vertex: float('infinity') for vertex in graph}
+    distances[start] = 0
+    pq = [(0, start)]
+    previous = {vertex: None for vertex in graph}
+    
+    while pq:
+        current_distance, current_vertex = heappop(pq)
+        
+        if current_distance > distances[current_vertex]:
+            continue
+            
+        for neighbor, weight in graph[current_vertex]:
+            distance = current_distance + weight
+            
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                previous[neighbor] = current_vertex
+                heappush(pq, (distance, neighbor))
+    
+    return distances, previous
+
+# Example usage:
+distances, previous = dijkstra(g.graph, 0)
+# Print shortest distances from vertex 0 to all others</code></pre>
+        </div>
+        <p class="explanation">Implementation of Dijkstra's algorithm for finding shortest paths in weighted graphs.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 4: Breadth-First Search (BFS)</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+from collections import deque
+
+def bfs(graph, start):
+    visited = set([start])
+    queue = deque([start])
+    
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=' ')  # Process current node
+        
+        for neighbor, _ in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+    
+    return visited
+
+# Example usage:
+visited = bfs(g.graph, 0)
+# Output: 0 1 2 3 (vertices in BFS order)</code></pre>
+        </div>
+        <p class="explanation">BFS implementation showing level-order traversal of graph vertices.</p>
+    </div>
+</div>
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+<style>
+.examples-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.code-block {
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin: 1em 0;
+    padding: 1em;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.algorithm-example {
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.explanation {
+    font-style: italic;
+    color: #666;
+    margin-top: 1em;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-bottom: 1em;
+}
+</style>
+{% endblock %}
+{% endblock %} 

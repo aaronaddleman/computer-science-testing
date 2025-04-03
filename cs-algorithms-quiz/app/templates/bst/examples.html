@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="examples-section">
+    <h2>Binary Search Tree Examples</h2>
+
+    <div class="algorithm-example">
+        <h3>Example 1: Basic BST Implementation</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, value):
+        if not self.root:
+            self.root = Node(value)
+            return
+        
+        current = self.root
+        while True:
+            if value < current.value:
+                if current.left is None:
+                    current.left = Node(value)
+                    break
+                current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(value)
+                    break
+                current = current.right</code></pre>
+        </div>
+        <p class="explanation">Basic BST implementation showing node structure and insertion operation.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 2: BST Search Operation</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+def search(self, value):
+    current = self.root
+    while current:
+        if value == current.value:
+            return True
+        elif value < current.value:
+            current = current.left
+        else:
+            current = current.right
+    return False
+
+# Example usage:
+bst = BST()
+for value in [5, 3, 7, 1, 4, 6, 8]:
+    bst.insert(value)
+print(bst.search(4))  # True
+print(bst.search(9))  # False</code></pre>
+        </div>
+        <p class="explanation">Efficient search implementation utilizing the BST property.</p>
+    </div>
+
+    <div class="algorithm-example">
+        <h3>Example 3: Tree Traversal</h3>
+        <div class="code-block">
+            <pre><code class="language-python">
+def inorder(self, node):
+    if node:
+        self.inorder(node.left)
+        print(node.value, end=' ')
+        self.inorder(node.right)
+
+def preorder(self, node):
+    if node:
+        print(node.value, end=' ')
+        self.preorder(node.left)
+        self.preorder(node.right)
+
+def postorder(self, node):
+    if node:
+        self.postorder(node.left)
+        self.postorder(node.right)
+        print(node.value, end=' ')</code></pre>
+        </div>
+        <p class="explanation">Different traversal methods: inorder (sorted order), preorder (root first), and postorder (leaves first).</p>
+    </div>
+</div>
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+<style>
+.examples-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.code-block {
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin: 1em 0;
+    padding: 1em;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.algorithm-example {
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.explanation {
+    font-style: italic;
+    color: #666;
+    margin-top: 1em;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-bottom: 1em;
+}
+</style>
+{% endblock %}
+{% endblock %} 

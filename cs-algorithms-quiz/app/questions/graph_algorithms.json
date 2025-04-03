@@ -1,39 +1,94 @@
 {
-    "topic": "graph-algorithms",
-    "name": "Graph Algorithms",
-    "description": "Questions about graph theory, traversal algorithms, shortest paths, and minimum spanning trees.",
+    "topic": "Graph Algorithms",
+    "description": "Master essential graph algorithms and their applications in solving real-world problems.",
+    "content_files": {
+        "overview": "templates/graph/overview.html",
+        "examples": "templates/graph/examples.html",
+        "complexity": "templates/graph/complexity.html",
+        "common_pitfalls": "templates/graph/common_pitfalls.html"
+    },
+    "images": {
+        "bfs_traversal": "static/images/bfs_traversal.svg",
+        "dfs_traversal": "static/images/dfs_traversal.svg",
+        "shortest_path": "static/images/shortest_path.svg"
+    },
+    "key_concepts": [
+        "Graph representation (adjacency matrix vs. adjacency list)",
+        "Graph traversal algorithms (BFS and DFS)",
+        "Shortest path algorithms (Dijkstra's and Bellman-Ford)",
+        "Minimum spanning trees (Prim's and Kruskal's)",
+        "Cycle detection and topological sorting"
+    ],
     "questions": [
         {
-            "id": "graph-1",
-            "category": "Basic Concepts",
-            "text": "What is the time complexity of BFS in a graph with V vertices and E edges?",
-            "options": ["O(V)", "O(E)", "O(V + E)", "O(V * E)"],
-            "correct_answer": "O(V + E)",
-            "explanation": "BFS visits each vertex once (O(V)) and explores each edge once (O(E)), resulting in O(V + E).",
-            "difficulty": "medium"
-        },
-        {
-            "id": "graph-2",
-            "category": "Shortest Path",
-            "text": "Which algorithm finds the shortest path in a weighted graph with negative edges?",
-            "options": ["Dijkstra's", "Bellman-Ford", "Floyd-Warshall", "A*"],
-            "correct_answer": "Bellman-Ford",
-            "explanation": "Bellman-Ford can handle negative edge weights, while Dijkstra's assumes all weights are positive.",
-            "difficulty": "hard"
-        },
-        {
-            "id": "graph-3",
-            "category": "Minimum Spanning Tree",
-            "text": "What is the primary difference between Prim's and Kruskal's algorithms?",
+            "id": "graph_representation",
+            "category": "Implementation",
+            "difficulty": "Easy",
+            "question": "Which graph representation would be most efficient for a sparse graph with many vertices but few edges?",
             "options": [
-                "Time complexity",
-                "Space complexity",
-                "Starting approach (vertex vs edge)",
-                "Final result"
+                "Adjacency Matrix",
+                "Adjacency List",
+                "Edge List",
+                "Incidence Matrix"
             ],
-            "correct_answer": "Starting approach (vertex vs edge)",
-            "explanation": "Prim's starts with a vertex and grows the tree, while Kruskal's starts with edges sorted by weight.",
-            "difficulty": "hard"
+            "correct_answer": 1,
+            "explanation": "Adjacency List is most efficient for sparse graphs as it only stores actual edges (O(V + E)) rather than all possible edges (O(V²)) like an Adjacency Matrix."
+        },
+        {
+            "id": "bfs_vs_dfs",
+            "category": "Algorithms",
+            "difficulty": "Medium",
+            "question": "Which traversal algorithm would be most appropriate for finding the shortest path in an unweighted graph?",
+            "options": [
+                "Depth-First Search (DFS)",
+                "Breadth-First Search (BFS)",
+                "Pre-order Traversal",
+                "Post-order Traversal"
+            ],
+            "correct_answer": 1,
+            "explanation": "BFS visits nodes in order of their distance from the source, guaranteeing the shortest path in terms of number of edges in unweighted graphs."
+        },
+        {
+            "id": "shortest_path",
+            "category": "Algorithms",
+            "difficulty": "Hard",
+            "question": "When should Bellman-Ford algorithm be preferred over Dijkstra's algorithm for finding shortest paths?",
+            "options": [
+                "When the graph is very dense",
+                "When the graph has negative edge weights",
+                "When the graph is directed",
+                "When the graph is unweighted"
+            ],
+            "correct_answer": 1,
+            "explanation": "Bellman-Ford should be used when the graph has negative edge weights, as Dijkstra's algorithm may fail in such cases. It can also detect negative cycles."
+        },
+        {
+            "id": "cycle_detection",
+            "category": "Implementation",
+            "difficulty": "Medium",
+            "question": "What is the most efficient way to detect a cycle in an undirected graph?",
+            "options": [
+                "Using DFS with parent tracking",
+                "Using BFS with level tracking",
+                "Using Dijkstra's algorithm",
+                "Using binary search"
+            ],
+            "correct_answer": 0,
+            "explanation": "DFS with parent tracking is most efficient for cycle detection in undirected graphs, as it can detect a back edge (edge to an already visited vertex) in O(V + E) time."
         }
+    ],
+    "common_mistakes": [
+        "Not handling disconnected components in graph traversal",
+        "Using Dijkstra's algorithm with negative weights",
+        "Incorrect cycle detection in directed vs undirected graphs",
+        "Poor choice of graph representation affecting performance",
+        "Not considering edge cases like self-loops and parallel edges"
+    ],
+    "best_practices": [
+        "Choose appropriate graph representation based on graph properties",
+        "Implement proper visited node tracking in traversal algorithms",
+        "Use efficient data structures (priority queues, union-find)",
+        "Consider both time and space complexity in implementation",
+        "Test with various graph configurations including edge cases"
     ]
 } 

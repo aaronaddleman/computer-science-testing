@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pitfalls-section">
+    <h2>Common Graph Algorithm Pitfalls and Solutions</h2>
+
+    <div class="pitfall-category">
+        <h3>Implementation Issues</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Incorrect Graph Representation</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Choosing the wrong graph representation can lead to inefficient algorithms or complex implementations.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use adjacency lists for sparse graphs (fewer edges)</li>
+                    <li>Use adjacency matrices for dense graphs or when quick edge lookups are needed</li>
+                    <li>Consider weighted edges and directional requirements when designing the structure</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Missing Edge Cases</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Not handling disconnected components, self-loops, or parallel edges.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Always check for disconnected components in traversal algorithms</li>
+                    <li>Implement proper validation for self-loops and parallel edges</li>
+                    <li>Test with various graph configurations including empty graphs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Algorithmic Mistakes</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Incorrect Cycle Detection</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Failing to properly detect cycles in directed vs undirected graphs.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use different approaches for directed and undirected graphs</li>
+                    <li>Maintain proper visited state tracking</li>
+                    <li>Consider using color-coding (white, gray, black) for directed cycle detection</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Shortest Path Algorithm Misuse</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Using Dijkstra's algorithm with negative weights or wrong priority queue implementation.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use Bellman-Ford for graphs with negative weights</li>
+                    <li>Implement proper priority queue updates in Dijkstra's algorithm</li>
+                    <li>Consider edge cases like disconnected components</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Performance Issues</h3>
+        
+        <div class="pitfall-item">
+            <h4>1. Inefficient Data Structures</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Using inappropriate data structures leading to poor performance.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use hash sets for O(1) lookup in visited nodes</li>
+                    <li>Implement efficient priority queues for shortest path algorithms</li>
+                    <li>Consider using Union-Find data structure for connectivity queries</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Memory Management</h4>
+            <div class="problem">
+                <strong>Problem:</strong> Poor memory management in large graphs or recursive implementations.
+            </div>
+            <div class="solution">
+                <strong>Solution:</strong>
+                <ul>
+                    <li>Use iterative approaches instead of recursive when possible</li>
+                    <li>Clear unnecessary data structures after use</li>
+                    <li>Consider space-efficient graph representations for large graphs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.pitfalls-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pitfall-category {
+    margin-bottom: 2em;
+}
+
+.pitfall-item {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.pitfall-item h4 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.problem, .solution {
+    margin: 0.5em 0;
+}
+
+.solution ul {
+    margin-top: 0.5em;
+    padding-left: 20px;
+}
+
+.solution li {
+    margin: 5px 0;
+}
+
+h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5em;
+}
+
+strong {
+    color: #2c3e50;
+}
+</style>
+{% endblock %}
+{% endblock %} 

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pitfalls-section">
+    <h2>Common BST Pitfalls and Solutions</h2>
+
+    <div class="pitfall-category">
+        <h3>Implementation Issues</h3>
+        <div class="pitfall-item">
+            <h4>1. Incorrect Node Deletion</h4>
+            <div class="problem">
+                <p><strong>Problem:</strong> Not handling all three cases of node deletion properly:</p>
+                <ul>
+                    <li>Leaf node deletion</li>
+                    <li>Node with one child</li>
+                    <li>Node with two children</li>
+                </ul>
+            </div>
+            <div class="solution">
+                <p><strong>Solution:</strong> Implement a comprehensive delete method that handles all cases:</p>
+                <ul>
+                    <li>For leaf nodes: Simply remove the node</li>
+                    <li>For one child: Replace node with its child</li>
+                    <li>For two children: Replace with inorder successor or predecessor</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>2. Unbalanced Tree Growth</h4>
+            <div class="problem">
+                <p><strong>Problem:</strong> Allowing the tree to become severely unbalanced, leading to O(n) operations.</p>
+            </div>
+            <div class="solution">
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>Implement self-balancing mechanisms (AVL or Red-Black)</li>
+                    <li>Monitor tree height during insertions</li>
+                    <li>Periodically rebalance if needed</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Algorithmic Mistakes</h3>
+        <div class="pitfall-item">
+            <h4>3. Incorrect Traversal Implementation</h4>
+            <div class="problem">
+                <p><strong>Problem:</strong> Mixing up traversal orders or implementing them incorrectly.</p>
+            </div>
+            <div class="solution">
+                <p><strong>Solution:</strong> Remember the order:</p>
+                <ul>
+                    <li>Inorder: Left → Root → Right (gives sorted order)</li>
+                    <li>Preorder: Root → Left → Right (useful for copying tree)</li>
+                    <li>Postorder: Left → Right → Root (useful for deletion)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pitfall-item">
+            <h4>4. Memory Management</h4>
+            <div class="problem">
+                <p><strong>Problem:</strong> Memory leaks during deletion or not properly handling references.</p>
+            </div>
+            <div class="solution">
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>Properly nullify references when deleting nodes</li>
+                    <li>Use appropriate garbage collection practices</li>
+                    <li>Maintain parent references if needed</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pitfall-category">
+        <h3>Design Considerations</h3>
+        <div class="pitfall-item">
+            <h4>5. Poor Choice of BST Variant</h4>
+            <div class="problem">
+                <p><strong>Problem:</strong> Using basic BST when a specialized variant would be more appropriate.</p>
+            </div>
+            <div class="solution">
+                <p><strong>Solution:</strong> Choose the right variant based on use case:</p>
+                <ul>
+                    <li>AVL Trees: When frequent lookups are needed</li>
+                    <li>Red-Black Trees: When frequent insertions/deletions are needed</li>
+                    <li>Splay Trees: When temporal locality is important</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.pitfalls-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pitfall-category {
+    margin-bottom: 2em;
+}
+
+.pitfall-item {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.pitfall-item h4 {
+    color: #e74c3c;
+    margin-top: 0;
+}
+
+.problem {
+    margin-bottom: 1em;
+}
+
+.solution {
+    background-color: #e8f5e9;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.problem strong, .solution strong {
+    color: #2c3e50;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin: 5px 0;
+}
+
+h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5em;
+}
+</style>
+{% endblock %}
+{% endblock %} 

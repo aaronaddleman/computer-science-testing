@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="#f8f9fa"/>
+    
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" font-family="Arial" font-size="20" fill="#2c3e50">Quick Sort: Recursive Partitioning</text>
+    
+    <!-- Initial Array -->
+    <g transform="translate(50, 80)">
+        <text x="0" y="-10" font-family="Arial" font-size="14" fill="#7f8c8d">Initial Array</text>
+        <rect x="0" y="0" width="40" height="40" fill="#e74c3c" stroke="#c0392b"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">64</text>
+        <rect x="60" y="0" width="40" height="40" fill="#3498db" stroke="#2980b9"/>
+        <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">34</text>
+        <rect x="120" y="0" width="40" height="40" fill="#2ecc71" stroke="#27ae60"/>
+        <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">25</text>
+        <rect x="180" y="0" width="40" height="40" fill="#f1c40f" stroke="#f39c12"/>
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">12</text>
+        <rect x="240" y="0" width="40" height="40" fill="#9b59b6" stroke="#8e44ad"/>
+        <text x="260" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">22</text>
+    </g>
+    
+    <!-- First Partition -->
+    <g transform="translate(50, 160)">
+        <text x="0" y="-10" font-family="Arial" font-size="14" fill="#7f8c8d">First Partition (pivot = 34)</text>
+        <rect x="0" y="0" width="40" height="40" fill="#2ecc71" stroke="#27ae60"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">25</text>
+        <rect x="60" y="0" width="40" height="40" fill="#f1c40f" stroke="#f39c12"/>
+        <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">12</text>
+        <rect x="120" y="0" width="40" height="40" fill="#9b59b6" stroke="#8e44ad"/>
+        <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">22</text>
+        <rect x="180" y="0" width="40" height="40" fill="#3498db" stroke="#2980b9"/>
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">34</text>
+        <rect x="240" y="0" width="40" height="40" fill="#e74c3c" stroke="#c0392b"/>
+        <text x="260" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">64</text>
+    </g>
+    
+    <!-- Left Subarray Partition -->
+    <g transform="translate(50, 240)">
+        <text x="0" y="-10" font-family="Arial" font-size="14" fill="#7f8c8d">Left Subarray Partition (pivot = 22)</text>
+        <rect x="0" y="0" width="40" height="40" fill="#f1c40f" stroke="#f39c12"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">12</text>
+        <rect x="60" y="0" width="40" height="40" fill="#9b59b6" stroke="#8e44ad"/>
+        <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">22</text>
+        <rect x="120" y="0" width="40" height="40" fill="#2ecc71" stroke="#27ae60"/>
+        <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">25</text>
+        <rect x="180" y="0" width="40" height="40" fill="#3498db" stroke="#2980b9"/>
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">34</text>
+        <rect x="240" y="0" width="40" height="40" fill="#e74c3c" stroke="#c0392b"/>
+        <text x="260" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">64</text>
+    </g>
+    
+    <!-- Final Sorted Array -->
+    <g transform="translate(50, 320)">
+        <text x="0" y="-10" font-family="Arial" font-size="14" fill="#7f8c8d">Final Sorted Array</text>
+        <rect x="0" y="0" width="40" height="40" fill="#f1c40f" stroke="#f39c12"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">12</text>
+        <rect x="60" y="0" width="40" height="40" fill="#9b59b6" stroke="#8e44ad"/>
+        <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">22</text>
+        <rect x="120" y="0" width="40" height="40" fill="#2ecc71" stroke="#27ae60"/>
+        <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">25</text>
+        <rect x="180" y="0" width="40" height="40" fill="#3498db" stroke="#2980b9"/>
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">34</text>
+        <rect x="240" y="0" width="40" height="40" fill="#e74c3c" stroke="#c0392b"/>
+        <text x="260" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="white">64</text>
+    </g>
+    
+    <!-- Explanation -->
+    <g transform="translate(400, 80)">
+        <text x="0" y="20" font-family="Arial" font-size="14" fill="#2c3e50">Recursive Process:</text>
+        <text x="0" y="50" font-family="Arial" font-size="12" fill="#7f8c8d">1. Choose pivot (34)</text>
+        <text x="0" y="70" font-family="Arial" font-size="12" fill="#7f8c8d">2. Partition: [25,12,22] | 34 | [64]</text>
+        <text x="0" y="90" font-family="Arial" font-size="12" fill="#7f8c8d">3. Recursively sort left: pivot (22)</text>
+        <text x="0" y="110" font-family="Arial" font-size="12" fill="#7f8c8d">4. Final partitions: [12] | 22 | [25] | 34 | [64]</text>
+    </g>
+    
+    <!-- Partition Tree -->
+    <g transform="translate(400, 160)">
+        <text x="0" y="0" font-family="Arial" font-size="14" fill="#2c3e50">Partition Tree:</text>
+        <!-- Tree structure showing the recursive partitioning -->
+        <line x1="100" y1="20" x2="50" y2="50" stroke="#95a5a6" stroke-width="2"/>
+        <line x1="100" y1="20" x2="150" y2="50" stroke="#95a5a6" stroke-width="2"/>
+        <circle cx="100" cy="20" r="15" fill="#3498db"/>
+        <text x="100" y="25" text-anchor="middle" font-family="Arial" font-size="12" fill="white">34</text>
+        
+        <circle cx="50" cy="50" r="15" fill="#9b59b6"/>
+        <text x="50" y="55" text-anchor="middle" font-family="Arial" font-size="12" fill="white">22</text>
+        
+        <circle cx="150" cy="50" r="15" fill="#e74c3c"/>
+        <text x="150" y="55" text-anchor="middle" font-family="Arial" font-size="12" fill="white">64</text>
+        
+        <line x1="50" y1="50" x2="25" y2="80" stroke="#95a5a6" stroke-width="2"/>
+        <line x1="50" y1="50" x2="75" y2="80" stroke="#95a5a6" stroke-width="2"/>
+        
+        <circle cx="25" cy="80" r="15" fill="#f1c40f"/>
+        <text x="25" y="85" text-anchor="middle" font-family="Arial" font-size="12" fill="white">12</text>
+        
+        <circle cx="75" cy="80" r="15" fill="#2ecc71"/>
+        <text x="75" y="85" text-anchor="middle" font-family="Arial" font-size="12" fill="white">25</text>
+    </g>
+</svg> 

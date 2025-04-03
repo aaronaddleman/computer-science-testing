@@ -5,13 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{{ topic.name }} - CS Algorithms Quiz</title>
+    <style>
+        .study-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .study-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .study-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .study-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .study-section li {
+            margin-bottom: 8px;
+        }
+        .study-section code {
+            background: #e8e8e8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .study-section pre {
+            background: #2c3e50;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .image-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .image-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .complexity-table th, .complexity-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .complexity-table th {
+            background-color: #f2f2f2;
+        }
+        .complexity-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>{{ topic.name }}</h1>
         <p class="description">{{ topic.description }}</p>
-        <a href="{{ request.path.replace('/info', '/test') }}" class="button">Start Test</a>
-        <a href="/" class="button">Back to Topics</a>
+        
+        <div class="study-section">
+            <h2>Overview</h2>
+            {% include template_dir ~ '/overview.html' ignore missing %}
+        </div>
+
+        <div class="study-section">
+            <h2>Key Concepts</h2>
+            {% include template_dir ~ '/key_concepts.html' ignore missing %}
+        </div>
+
+        <div class="study-section">
+            <h2>Examples</h2>
+            {% include template_dir ~ '/examples.html' ignore missing %}
+        </div>
+
+        <div class="study-section">
+            <h2>Time and Space Complexity</h2>
+            {% include template_dir ~ '/complexity.html' ignore missing %}
+        </div>
+
+        {% if topic.images %}
+        <div class="image-section">
+            {% if topic.images is mapping %}
+                {% for name, path in topic.images.items() %}
+                <div class="study-image">
+                    <img src="{{ url_for('static', filename=path) }}" alt="{{ name }}">
+                    <p class="image-caption">{{ name | replace('_', ' ') | title }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                {% for image in topic.images %}
+                <div class="study-image">
+                    <img src="{{ url_for('static', filename='images/' + image.filename) }}" alt="{{ image.caption }}">
+                    <p class="image-caption">{{ image.caption }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="study-section">
+            <h2>Common Pitfalls and Tips</h2>
+            {% include template_dir ~ '/common_pitfalls.html' ignore missing %}
+        </div>
+
+        <div class="button-section" style="margin-top: 30px;">
+            <a href="{{ request.path.replace('/info', '/test') }}" class="button">Take Quiz</a>
+            <a href="/" class="button">Back to Topics</a>
+        </div>
     </div>
 </body>
 </html> 
